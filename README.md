@@ -32,8 +32,8 @@ Changelog
 
 + hardware V02 (proto)
 
-* Rearranged header: put VCC/GND/SDA/SCL in "standard" order
+	* Rearranged header: put VCC/GND/SDA/SCL in "standard" order
 
 + hardware V01 (proto)
 
-* Initial prototype
+	* Initial prototype
