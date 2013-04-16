@@ -6887,14 +6887,13 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <part name="FRAME1" library="SparkFun-Aesthetics" deviceset="FRAME-LETTER" device=""/>
 <part name="U1" library="mike-temp" deviceset="BMP180" device=""/>
 <part name="SJ1" library="mike-temp" deviceset="SOLDERJUMPER_2WAY" device="PASTE1&amp;2&amp;3"/>
-<part name="R1" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES"/>
-<part name="R2" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES"/>
+<part name="R1" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES" value="4.7K"/>
+<part name="R2" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES" value="4.7K"/>
 <part name="C1" library="SparkFun-Capacitors" deviceset="CAP" device="0603-CAP" value="0.1uF"/>
 <part name="C2" library="SparkFun-Capacitors" deviceset="CAP" device="0603-CAP" value="0.1uF"/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="10UF-16V-10%(TANT)" device="" value="10uF"/>
 <part name="JP1" library="mike-temp" deviceset="M05" device="_ROUNDONLY_NOSILK"/>
 <part name="SJ2" library="mike-temp" deviceset="SOLDERJUMPER" device="NC" value=""/>
-<part name="SUPPLY1" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="SUPPLY2" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VCCIO"/>
 <part name="GND1" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
@@ -6927,7 +6926,6 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <instance part="C3" gate="G$1" x="144.78" y="91.44"/>
 <instance part="JP1" gate="G$1" x="40.64" y="96.52"/>
 <instance part="SJ2" gate="1" x="160.02" y="116.84"/>
-<instance part="SUPPLY1" gate="1" x="144.78" y="127"/>
 <instance part="SUPPLY2" gate="1" x="154.94" y="127"/>
 <instance part="SUPPLY3" gate="1" x="165.1" y="127"/>
 <instance part="GND1" gate="1" x="139.7" y="78.74"/>
@@ -6966,7 +6964,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <wire x1="91.44" y1="101.6" x2="81.28" y2="101.6" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="104.14" x2="91.44" y2="101.6" width="0.1524" layer="91"/>
 <junction x="91.44" y="101.6"/>
-<label x="81.28" y="101.6" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="81.28" y="101.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP1" gate="G$1" pin="5"/>
@@ -6982,7 +6980,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <wire x1="101.6" y1="96.52" x2="81.28" y2="96.52" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="104.14" x2="101.6" y2="96.52" width="0.1524" layer="91"/>
 <junction x="101.6" y="96.52"/>
-<label x="81.28" y="96.52" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="81.28" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP1" gate="G$1" pin="4"/>
@@ -6993,7 +6991,6 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <net name="VCC" class="0">
 <segment>
 <pinref part="SJ2" gate="1" pin="1"/>
-<wire x1="154.94" y1="114.3" x2="154.94" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="154.94" y1="116.84" x2="154.94" y2="127" width="0.1524" layer="91"/>
 <junction x="154.94" y="116.84"/>
 <pinref part="SUPPLY2" gate="1" pin="VCC"/>
@@ -7005,9 +7002,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <wire x1="144.78" y1="101.6" x2="144.78" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G$1" pin="+"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<pinref part="SUPPLY1" gate="1" pin="VCC"/>
-<wire x1="144.78" y1="127" x2="144.78" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="154.94" y1="114.3" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="116.84" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
 <junction x="154.94" y="101.6"/>
 </segment>
 <segment>
