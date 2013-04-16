@@ -32,7 +32,8 @@ Changelog
 
 + hardware V02 (proto)
 
-	* Rearranged header: put VCC/GND/SDA/SCL in "standard" order
+	* Rearranged header: put VDD/GND/SDA/SCL in "standard" order
+	* I2C pullups to VDDIO
 
 + hardware V01 (proto)
 

@@ -5248,6 +5248,7 @@ This is the standard Spark Fun Electronics PCB logo.</description>
 <circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="21"/>
 <text x="-2" y="2" size="1.27" layer="25">&gt;NAME</text>
 <text x="-2" y="-3.375" size="1.27" layer="27">&gt;VALUE</text>
+<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="51"/>
 </package>
 <package name="SJ_2W">
 <description>&lt;b&gt;Solder jumper&lt;/b&gt;</description>
@@ -5623,6 +5624,11 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <text x="-0.9498" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
 <text x="-0.9498" y="-1.651" size="0.4064" layer="27">&gt;VALUE</text>
 <rectangle x1="-1.2192" y1="-1.143" x2="1.2192" y2="1.143" layer="31"/>
+<text x="-0.45303125" y="-0.498415625" size="0.3048" layer="51" ratio="15" rot="R35">PASTE</text>
+<wire x1="-0.79375" y1="0.635" x2="-0.79375" y2="-0.635" width="0.127" layer="51"/>
+<wire x1="-0.79375" y1="-0.635" x2="0.79375" y2="-0.635" width="0.127" layer="51"/>
+<wire x1="0.79375" y1="-0.635" x2="0.79375" y2="0.635" width="0.127" layer="51"/>
+<wire x1="0.79375" y1="0.635" x2="-0.79375" y2="0.635" width="0.127" layer="51"/>
 </package>
 <package name="SJ_2S-TRACE">
 <description>Solder jumper, small, shorted with trace. No paste layer. Trace is cuttable.</description>
@@ -6894,13 +6900,13 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <part name="C3" library="SparkFun-Capacitors" deviceset="10UF-16V-10%(TANT)" device="" value="10uF"/>
 <part name="JP1" library="mike-temp" deviceset="M05" device="_ROUNDONLY_NOSILK"/>
 <part name="SJ2" library="mike-temp" deviceset="SOLDERJUMPER" device="NC" value=""/>
-<part name="SUPPLY2" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
-<part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VCCIO"/>
+<part name="SUPPLY2" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VDD"/>
+<part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VDDIO"/>
 <part name="GND1" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND2" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND4" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
+<part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VDDIO"/>
 <part name="LOGO1" library="SparkFun-Aesthetics" deviceset="LOGO-SFE" device="NW2"/>
 <part name="LOGO2" library="SparkFun-Aesthetics" deviceset="OSHW-LOGO" device="S"/>
 <part name="LOGO3" library="SparkFun-Aesthetics" deviceset="LOGO-SFE" device="SK"/>
@@ -6913,6 +6919,11 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <rectangle x1="94.615" y1="118.745" x2="98.425" y2="120.015" layer="94"/>
 <rectangle x1="159.385" y1="116.205" x2="160.655" y2="117.475" layer="94"/>
 <text x="172.72" y="7.62" size="2.54" layer="94">M Grusin</text>
+<text x="104.14" y="119.38" size="1.778" layer="97">SHORT BOTH SIDES OF SJ1</text>
+<text x="104.14" y="116.84" size="1.778" layer="97">TO ENABLE PULL-UP RESISTORS</text>
+<text x="104.14" y="114.3" size="1.778" layer="97">ON I2C LINES</text>
+<text x="167.64" y="119.38" size="1.778" layer="97">SHORT SJ2 TO CONNECT VDD</text>
+<text x="167.64" y="116.84" size="1.778" layer="97">AND VDDIO TOGETHER</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -6988,7 +6999,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <label x="50.8" y="99.06" size="1.27" layer="95" rot="MR180" xref="yes"/>
 </segment>
 </net>
-<net name="VCC" class="0">
+<net name="VDD" class="0">
 <segment>
 <pinref part="SJ2" gate="1" pin="1"/>
 <wire x1="154.94" y1="116.84" x2="154.94" y2="127" width="0.1524" layer="91"/>
@@ -7004,11 +7015,6 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <pinref part="C1" gate="G$1" pin="1"/>
 <wire x1="154.94" y1="116.84" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
 <junction x="154.94" y="101.6"/>
-</segment>
-<segment>
-<pinref part="SJ1" gate="G$1" pin="2"/>
-<pinref part="SUPPLY4" gate="1" pin="VCC"/>
-<wire x1="96.52" y1="127" x2="96.52" y2="124.46" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP1" gate="G$1" pin="2"/>
@@ -7044,7 +7050,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <label x="50.8" y="96.52" size="1.27" layer="95" rot="MR180" xref="yes"/>
 </segment>
 </net>
-<net name="VCCIO" class="0">
+<net name="VDDIO" class="0">
 <segment>
 <pinref part="SJ2" gate="1" pin="2"/>
 <wire x1="165.1" y1="114.3" x2="165.1" y2="116.84" width="0.1524" layer="91"/>
@@ -7062,6 +7068,11 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <pinref part="JP1" gate="G$1" pin="1"/>
 <wire x1="48.26" y1="91.44" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
 <label x="50.8" y="91.44" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="SJ1" gate="G$1" pin="2"/>
+<pinref part="SUPPLY4" gate="1" pin="VCC"/>
+<wire x1="96.52" y1="127" x2="96.52" y2="124.46" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
