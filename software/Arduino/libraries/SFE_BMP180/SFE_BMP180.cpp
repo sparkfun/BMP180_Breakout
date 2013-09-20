@@ -1,5 +1,5 @@
 /*
-  BMP085 pressure sensor library
+  BMP180 pressure sensor library
 	
   Mike Grusin
   http://www.sparkfun.com
@@ -8,14 +8,16 @@
   http://wmrx00.sourceforge.net/
   http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
 
-  version 1.2 2012/01/23 update for compatiblity with Arduino 1.0
+  Forked from BMP085 library by M.Grusin
+
+	version 1.0 2013/09/20 initial version
 	
   Example Code:
 
-  #include <SFE_BMP085.h>
+  #include <SFE_BMP180.h>
   #include <Wire.h>
 
-  SFE_BMP085 pressure(BMP_ADDR);
+  SFE_BMP180 pressure(BMP_ADDR);
 
   char status;
   double T,P,p0,a;
@@ -26,7 +28,7 @@
   // initialize the sensor (important to get calibration values stored on the device)
   if (pressure.begin())
   {
-    Serial.println("BMP085 init success");
+    Serial.println("BMP180 init success");
     while(1)
     {
       // tell the sensor to start a temperature measurement
@@ -98,23 +100,23 @@
       delay(10000);
     }
   }
-  else Serial.println("BMP085 init fail\n\n");
+  else Serial.println("BMP180 init fail\n\n");
 
 
 */
 
-#include <SFE_BMP085.h>
+#include <SFE_BMP180.h>
 #include <Wire.h>
 #include <stdio.h>
 #include <math.h>
 
-SFE_BMP085::SFE_BMP085(char i2c_address)
+SFE_BMP180::SFE_BMP180(char i2c_address)
 {
 	_i2c_address = i2c_address;
 	Wire.begin();
 }
 
-char SFE_BMP085::begin()
+char SFE_BMP180::begin()
 {
 	double c3,c4,b1;
 	
@@ -144,7 +146,7 @@ char SFE_BMP085::begin()
 		//AC1 = 408; AC2 = -72; AC3 = -14383; AC4 = 32741; AC5 = 32757; AC6 = 23153;
 		//B1 = 6190; B2 = 4; MB = -32768; MC = -8711; MD = 2868;
 
-		// example from http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
+		// example from http://wmrx00.sourceforge.net/Arduino/BMP180-Calcs.pdf
 		//AC1 = 7911; AC2 = -934; AC3 = -14306; AC4 = 31567; AC5 = 25671; AC6 = 18974;
 		//VB1 = 5498; VB2 = 46; MB = -32768; MC = -11075; MD = 2432;
 
@@ -209,7 +211,7 @@ char SFE_BMP085::begin()
 }
 
 //value is address of a short (16-bit) int
-char SFE_BMP085::readInt(char address, int *value)
+char SFE_BMP180::readInt(char address, int *value)
 {
 	unsigned char data[2];
 
@@ -225,7 +227,7 @@ char SFE_BMP085::readInt(char address, int *value)
 }
 
 //value is address of a short (16-bit) int
-char SFE_BMP085::readUInt(char address, unsigned int *value)
+char SFE_BMP180::readUInt(char address, unsigned int *value)
 {
 	unsigned char data[2];
 
@@ -241,7 +243,7 @@ char SFE_BMP085::readUInt(char address, unsigned int *value)
 
 //values is an array of char, first entry should be the register to read from
 //subsequent entries will be filled with return values
-char SFE_BMP085::readBytes(unsigned char *values, char length)
+char SFE_BMP180::readBytes(unsigned char *values, char length)
 {
 	char x;
 
@@ -262,7 +264,7 @@ char SFE_BMP085::readBytes(unsigned char *values, char length)
 
 //value is an array of char, first entry should be the register to write to
 //subsequent entries will be values to write to that register
-char SFE_BMP085::writeBytes(unsigned char *values, char length)
+char SFE_BMP180::writeBytes(unsigned char *values, char length)
 {
 	char x;
 	
@@ -274,12 +276,12 @@ char SFE_BMP085::writeBytes(unsigned char *values, char length)
 		return(0);
 }
 
-char SFE_BMP085::startTemperature(void)
+char SFE_BMP180::startTemperature(void)
 {
 	unsigned char data[2], result;
 	
-	data[0] = BMP085_CONTROL_REG;
-	data[1] = BMP085_COMMAND_TEMPERATURE;
+	data[0] = BMP180_CONTROL_REG;
+	data[1] = BMP180_COMMAND_TEMPERATURE;
 	result = writeBytes(data, 2);
 	if (result) // good write?
 		return(5); // return the delay in ms (rounded up) to wait before retrieving data
@@ -287,32 +289,32 @@ char SFE_BMP085::startTemperature(void)
 		return(0); // or return 0 if there was a problem communicating with the BMP
 }
 
-char SFE_BMP085::startPressure(char oversampling)
+char SFE_BMP180::startPressure(char oversampling)
 {
 	unsigned char data[2], result, delay;
 	
-	data[0] = BMP085_CONTROL_REG;
+	data[0] = BMP180_CONTROL_REG;
 
 	switch (oversampling)
 	{
 		case 0:
-			data[1] = BMP085_COMMAND_PRESSURE0;
+			data[1] = BMP180_COMMAND_PRESSURE0;
 			delay = 5;
 		break;
 		case 1:
-			data[1] = BMP085_COMMAND_PRESSURE1;
+			data[1] = BMP180_COMMAND_PRESSURE1;
 			delay = 8;
 		break;
 		case 2:
-			data[1] = BMP085_COMMAND_PRESSURE2;
+			data[1] = BMP180_COMMAND_PRESSURE2;
 			delay = 14;
 		break;
 		case 3:
-			data[1] = BMP085_COMMAND_PRESSURE3;
+			data[1] = BMP180_COMMAND_PRESSURE3;
 			delay = 26;
 		break;
 		default:
-			data[1] = BMP085_COMMAND_PRESSURE0;
+			data[1] = BMP180_COMMAND_PRESSURE0;
 			delay = 5;
 		break;
 	}
@@ -323,14 +325,14 @@ char SFE_BMP085::startPressure(char oversampling)
 		return(0); // or return 0 if there was a problem communicating with the BMP
 }
 
-char SFE_BMP085::getTemperature(double *T)
+char SFE_BMP180::getTemperature(double *T)
 {
 	unsigned char data[2];
 	char result;
 	double tu, a;
 	//char tempstring[20];
 	
-	data[0] = BMP085_RESULT_REG;
+	data[0] = BMP180_RESULT_REG;
 
 	result = readBytes(data, 2);
 	if (result) // good read, calculate temperature
@@ -364,14 +366,14 @@ char SFE_BMP085::getTemperature(double *T)
 // requires startPressure() to have been called prior to calling getPressure()
 // return value will be 1 for success, 0 for I2C error
 // note that calculated pressure value is absolute mbars, to compensate for altitude call sealevel()
-char SFE_BMP085::getPressure(double *P, double *T)
+char SFE_BMP180::getPressure(double *P, double *T)
 {
 	unsigned char data[3];
 	char result;
 	double pu,s,x,y,z;
 	//char tempstring[20];
 	
-	data[0] = BMP085_RESULT_REG;
+	data[0] = BMP180_RESULT_REG;
 
 	result = readBytes(data, 3);
 	if (result) // good read, calculate pressure
@@ -406,14 +408,14 @@ char SFE_BMP085::getPressure(double *P, double *T)
 
 // sealevel()
 // given a pressure P (mb) taken at a specific altitude (meters), return the equivalent pressure (mb) at sea level
-double SFE_BMP085::sealevel(double P, double A)
+double SFE_BMP180::sealevel(double P, double A)
 {
 	return(P / pow(1-(A/44330.0),5.255));
 }
 
 // altitude()
 // given a pressure measurement P (mb) and the pressure at a baseline P0 (mb), return altitude (meters) above baseline
-double SFE_BMP085::altitude(double P, double P0)
+double SFE_BMP180::altitude(double P, double P0)
 {
 	return(44330.0*(1-pow(P/P0,1/5.255)));
 }

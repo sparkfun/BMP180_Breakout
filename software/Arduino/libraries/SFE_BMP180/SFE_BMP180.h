@@ -1,5 +1,5 @@
 /*
-  SFE_BMP085 pressure sensor library for Arduino
+  SFE_BMP180 pressure sensor library for Arduino
 	
   Mike Grusin
   http://www.sparkfun.com
@@ -12,10 +12,10 @@
 	
   Example Code:
 
-  #include <SFE_BMP085.h>
+  #include <SFE_BMP180.h>
   #include <Wire.h>
 
-  SFE_BMP085 pressure(BMP_ADDR);
+  SFE_BMP180 pressure(BMP_ADDR);
 
   char status;
   double T,P,p0,a;
@@ -26,7 +26,7 @@
   // initialize the sensor (important to get calibration values stored on the device)
   if (pressure.begin())
   {
-    Serial.println("BMP085 init success");
+    Serial.println("BMP180 init success");
     while(1)
     {
       // tell the sensor to start a temperature measurement
@@ -98,12 +98,12 @@
       delay(10000);
     }
   }
-  else Serial.println("BMP085 init fail\n\n");
+  else Serial.println("BMP180 init fail\n\n");
 
 */
 
-#ifndef SFE_BMP085_h
-#define SFE_BMP085_h
+#ifndef SFE_BMP180_h
+#define SFE_BMP180_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -111,17 +111,17 @@
 #include "WProgram.h"
 #endif
 
-class SFE_BMP085
+class SFE_BMP180
 {
 	public:
-		SFE_BMP085(char i2c_address);
+		SFE_BMP180(char i2c_address);
 
 		char begin();
-			// call pressure.begin() to initialize BMP085 before use
+			// call pressure.begin() to initialize BMP180 before use
 			// returns 1 if success, 0 if failure (bad component or I2C bus shorted?)
 		
 		char startTemperature(void);
-			// command BMP085 to start a temperature measurement
+			// command BMP180 to start a temperature measurement
 			// returns n (number of ms to wait) for success, 0 for fail
 
 		char getTemperature(double *T);
@@ -130,7 +130,7 @@ class SFE_BMP085
 			// returns 1 for success, 0 for fail
 
 		char startPressure(char oversampling);
-			// command BMP085 to start a pressure measurement
+			// command BMP180 to start a pressure measurement
 			// oversampling: 0 - 3 for oversampling value
 			// returns n (number of ms to wait) for success, 0 for fail
 
@@ -155,25 +155,25 @@ class SFE_BMP085
 	private:
 	
 		char readInt(char address, int *value);
-			// read an signed int (16 bits) from a BMP085 register
-			// address: BMP085 register address
+			// read an signed int (16 bits) from a BMP180 register
+			// address: BMP180 register address
 			// *value: pointer to signed int for returned value (16 bits)
 			// returns 1 for success, 0 for fail, with read value(s) in *value
 
 		char readUInt(char address, unsigned int *value);
-			// read an unsigned int (16 bits) from a BMP085 register
-			// address: BMP085 register address
+			// read an unsigned int (16 bits) from a BMP180 register
+			// address: BMP180 register address
 			// *value: pointer to unsigned int for returned value (16 bits)
 			// returns 1 for success, 0 for fail, with read value(s) in *value
 
 		char readBytes(unsigned char *values, char length);
-			// read a number of bytes from a BMP085 register
+			// read a number of bytes from a BMP180 register
 			// values: array of char with register address in first location [0]
 			// length: number of bytes to read back
 			// returns 1 for success, 0 for fail, with read bytes in values[] array
 			
 		char writeBytes(unsigned char *values, char length);
-			// write a number of bytes to a BMP085 register (and consecutive subsequent registers)
+			// write a number of bytes to a BMP180 register (and consecutive subsequent registers)
 			// values: array of char with register address in first location [0]
 			// length: number of bytes to write
 			// returns 1 for success, 0 for fail
@@ -186,13 +186,13 @@ class SFE_BMP085
 
 #define BMP_ADDR 0x77 // 7-bit address
 
-#define	BMP085_CONTROL_REG 0xF4
-#define	BMP085_RESULT_REG 0xF6
+#define	BMP180_CONTROL_REG 0xF4
+#define	BMP180_RESULT_REG 0xF6
 
-#define	BMP085_COMMAND_TEMPERATURE 0x2E
-#define	BMP085_COMMAND_PRESSURE0 0x34
-#define	BMP085_COMMAND_PRESSURE1 0x74
-#define	BMP085_COMMAND_PRESSURE2 0xB4
-#define	BMP085_COMMAND_PRESSURE3 0xF4
+#define	BMP180_COMMAND_TEMPERATURE 0x2E
+#define	BMP180_COMMAND_PRESSURE0 0x34
+#define	BMP180_COMMAND_PRESSURE1 0x74
+#define	BMP180_COMMAND_PRESSURE2 0xB4
+#define	BMP180_COMMAND_PRESSURE3 0xF4
 
 #endif
