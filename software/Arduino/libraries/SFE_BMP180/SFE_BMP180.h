@@ -8,14 +8,16 @@
   http://wmrx00.sourceforge.net/
   http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
 
-  version 1.2 2012/01/23 update for compatiblity with Arduino 1.0
-	
+  Forked from BMP085 library by M.Grusin
+
+	version 1.0 2013/09/20 initial version
+		
   Example Code:
 
   #include <SFE_BMP180.h>
   #include <Wire.h>
 
-  SFE_BMP180 pressure(BMP_ADDR);
+  SFE_BMP180 pressure(BMP180_ADDR);
 
   char status;
   double T,P,p0,a;
@@ -184,10 +186,10 @@ class SFE_BMP180
 		double c5,c6,mc,md,x0,x1,x2,y0,y1,y2,p0,p1,p2;
 };
 
-#define BMP_ADDR 0x77 // 7-bit address
+#define BMP180_ADDR 0x77 // 7-bit address
 
-#define	BMP180_CONTROL_REG 0xF4
-#define	BMP180_RESULT_REG 0xF6
+#define	BMP180_REG_CONTROL 0xF4
+#define	BMP180_REG_RESULT 0xF6
 
 #define	BMP180_COMMAND_TEMPERATURE 0x2E
 #define	BMP180_COMMAND_PRESSURE0 0x34

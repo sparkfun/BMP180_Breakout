@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="2" display="yes" altdistance="0.0125" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="2" display="yes" altdistance="0.00625" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -29,14 +29,14 @@
 <layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="16" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="14" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="14" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
@@ -46,7 +46,7 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
@@ -121,13 +121,13 @@
 <wire x1="15.22" y1="0" x2="15.24" y2="15.24" width="0.2032" layer="20"/>
 <wire x1="15.24" y1="15.24" x2="0" y2="15.24" width="0.2032" layer="20"/>
 <wire x1="0" y1="15.24" x2="0" y2="0" width="0.2032" layer="20"/>
-<text x="4.2545" y="13.6525" size="1.27" layer="21" font="vector" ratio="15">BMP180</text>
-<text x="4.60375" y="2.2225" size="1.27" layer="21" font="vector" ratio="15">+</text>
-<text x="1.905" y="2.38125" size="1.016" layer="21" font="vector" ratio="15">IO</text>
-<text x="7.14375" y="2.2225" size="1.27" layer="21" font="vector" ratio="15">-</text>
-<text x="9.36625" y="2.38125" size="1.016" layer="21" font="vector" ratio="15">CL</text>
-<text x="11.90625" y="2.38125" size="1.016" layer="21" font="vector" ratio="15">DA</text>
-<text x="10.95375" y="13.6525" size="1.27" layer="22" font="vector" ratio="15" rot="MR0">BMP180</text>
+<text x="7.77875" y="13.335" size="1.27" layer="21" font="vector" ratio="15" align="bottom-center">BMP180</text>
+<text x="4.60375" y="2.2225" size="1.27" layer="21" font="vector" ratio="20">+</text>
+<text x="1.905" y="2.38125" size="1.016" layer="21" font="vector" ratio="20">IO</text>
+<text x="7.14375" y="2.2225" size="1.27" layer="21" font="vector" ratio="20">-</text>
+<text x="9.36625" y="2.38125" size="1.016" layer="21" font="vector" ratio="20">CL</text>
+<text x="11.90625" y="2.38125" size="1.016" layer="21" font="vector" ratio="20">DA</text>
+<text x="7.46125" y="13.335" size="1.27" layer="22" font="vector" ratio="15" rot="MR0" align="bottom-center">BMP180</text>
 <text x="12.065" y="2.54" size="1.27" layer="22" font="vector" ratio="15" rot="MR90">SDA</text>
 <text x="9.525" y="2.54" size="1.27" layer="22" font="vector" ratio="15" rot="MR90">SCL</text>
 <text x="6.985" y="2.54" size="1.27" layer="22" font="vector" ratio="15" rot="MR90">GND</text>
@@ -140,7 +140,9 @@
 <text x="18.25625" y="8.5725" size="1.016" layer="47" font="vector" ratio="10">0.125 X 2</text>
 <text x="6.35" y="-10.16" size="1.778" layer="27" font="vector">M Grusin</text>
 <dimension x1="2.54" y1="1.27" x2="2.54" y2="12.7" x3="-1.27" y3="6.985" textsize="1.016" textratio="10" layer="47" dtype="vertical" unit="inch"/>
-<text x="0.381" y="0.3175" size="1.016" layer="16" font="vector" ratio="15" rot="MR90">V02</text>
+<text x="0.381" y="0.3175" size="1.016" layer="16" font="vector" ratio="20" rot="MR90">V10</text>
+<text x="7.77875" y="11.7475" size="1.27" layer="21" font="vector" ratio="15" align="bottom-center">BARO</text>
+<text x="7.46125" y="11.7475" size="1.27" layer="22" font="vector" ratio="15" rot="MR0" align="bottom-center">BARO</text>
 </plain>
 <libraries>
 <library name="SparkFun-Aesthetics">
@@ -514,54 +516,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <vertex x="0.1794" y="-0.4331"/>
 </polygon>
 </package>
-<package name="SFE-LOGO-FLAME">
-<polygon width="0.0254" layer="21">
-<vertex x="0.5462" y="1.8974"/>
-<vertex x="0.4979" y="1.905" curve="17.884178"/>
-<vertex x="0.3099" y="1.905" curve="46.327753"/>
-<vertex x="0.0712" y="1.7551" curve="35.91905"/>
-<vertex x="0.0001" y="1.5189"/>
-<vertex x="0.0001" y="0.0025"/>
-<vertex x="0.4877" y="0.5512" curve="-23.528974"/>
-<vertex x="0.6757" y="0.6909" curve="-19.885101"/>
-<vertex x="0.7519" y="0.7112"/>
-<vertex x="0.9805" y="0.7112" curve="31.19409"/>
-<vertex x="1.3717" y="0.8204" curve="24.226678"/>
-<vertex x="1.679" y="1.11" curve="41.579705"/>
-<vertex x="1.8593" y="1.844" curve="25.48189"/>
-<vertex x="1.7527" y="2.1412" curve="24.327175"/>
-<vertex x="1.5495" y="2.347"/>
-<vertex x="1.5495" y="2.2581" curve="-30.728978"/>
-<vertex x="1.5418" y="2.2301" curve="-33.047583"/>
-<vertex x="1.4733" y="2.1666" curve="-11.956766"/>
-<vertex x="1.4529" y="2.159" curve="-49.772638"/>
-<vertex x="1.2878" y="2.1895" curve="-0.938211"/>
-<vertex x="1.1964" y="2.2555" curve="-17.462115"/>
-<vertex x="1.1177" y="2.3343" curve="-18.133005"/>
-<vertex x="1.0669" y="2.4333" curve="-27.405164"/>
-<vertex x="1.0618" y="2.4994" curve="-60.325263"/>
-<vertex x="1.2015" y="2.6695" curve="-18.806378"/>
-<vertex x="1.3056" y="2.6899" curve="-3.38798"/>
-<vertex x="1.3666" y="2.6899"/>
-<vertex x="1.3665" y="2.6899"/>
-<vertex x="1.364" y="2.6924" curve="28.458071"/>
-<vertex x="1.2701" y="2.7483" curve="-13.16107"/>
-<vertex x="1.2345" y="2.7635" curve="11.36204"/>
-<vertex x="1.2116" y="2.7737" curve="17.239689"/>
-<vertex x="1.0338" y="2.8042" curve="33.13693"/>
-<vertex x="0.7849" y="2.7356" curve="15.258219"/>
-<vertex x="0.6376" y="2.6137" curve="72.107848"/>
-<vertex x="0.597" y="2.2682" curve="18.59376"/>
-<vertex x="0.8611" y="1.938" curve="-104.814891"/>
-<vertex x="0.8332" y="1.5799" curve="-28.91879"/>
-<vertex x="0.6528" y="1.5189" curve="-42.347638"/>
-<vertex x="0.4446" y="1.5824" curve="-32.991127"/>
-<vertex x="0.3887" y="1.6612" curve="-37.722834"/>
-<vertex x="0.3887" y="1.7958" curve="-35.953185"/>
-<vertex x="0.4115" y="1.8263" curve="1.480237"/>
-<vertex x="0.4954" y="1.8872" curve="-50.628124"/>
-</polygon>
-</package>
 </packages>
 </library>
 <library name="mike-temp">
@@ -931,7 +885,6 @@ design rules under a new name.</description>
 <element name="SJ2" library="mike-temp" package="SJ_2S" value="" x="1.27" y="5.08"/>
 <element name="LOGO1" library="SparkFun-Aesthetics" package="SFE-NEW-WEB" value="LOGO-SFENW2" x="13.97" y="7.9375" rot="MR0"/>
 <element name="LOGO2" library="SparkFun-Aesthetics" package="OSHW-LOGO-S" value="OSHW-LOGOS" x="7.62" y="7.14375" rot="MR0"/>
-<element name="LOGO3" library="SparkFun-Aesthetics" package="SFE-LOGO-FLAME" value="LOGO-SFESK" x="6.985" y="10.63625" rot="MR0"/>
 <element name="STANDOFF1" library="SparkFun-Electromechanical" package="STAND-OFF" value="STAND-OFF" x="12.7" y="12.7"/>
 <element name="STANDOFF2" library="SparkFun-Electromechanical" package="STAND-OFF" value="STAND-OFF" x="2.54" y="12.7"/>
 </elements>
@@ -1009,7 +962,7 @@ design rules under a new name.</description>
 <vertex x="15.24" y="15.24"/>
 </polygon>
 <via x="10.4775" y="7.62" extent="1-16" drill="0.508"/>
-<via x="8.5725" y="12.7" extent="1-16" drill="0.508"/>
+<via x="9.8425" y="11.1125" extent="1-16" drill="0.508"/>
 <via x="0.9525" y="9.8425" extent="1-16" drill="0.508"/>
 </signal>
 <signal name="VDDIO">

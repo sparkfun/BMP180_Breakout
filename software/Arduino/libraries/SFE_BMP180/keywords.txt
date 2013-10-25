@@ -24,4 +24,4 @@ altitude	KEYWORD2
 # Constants (LITERAL1)
 #######################################
 
-BMP_ADDR	LITERAL1
+BMP180_ADDR	LITERAL1

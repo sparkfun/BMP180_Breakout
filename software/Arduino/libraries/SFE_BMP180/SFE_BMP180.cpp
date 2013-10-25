@@ -17,7 +17,7 @@
   #include <SFE_BMP180.h>
   #include <Wire.h>
 
-  SFE_BMP180 pressure(BMP_ADDR);
+  SFE_BMP180 pressure(BMP180_ADDR);
 
   char status;
   double T,P,p0,a;
@@ -113,7 +113,7 @@
 SFE_BMP180::SFE_BMP180(char i2c_address)
 {
 	_i2c_address = i2c_address;
-	Wire.begin();
+//	Wire.begin();
 }
 
 char SFE_BMP180::begin()
@@ -136,8 +136,6 @@ char SFE_BMP180::begin()
 		readInt(0xBC,&MC) &&
 		readInt(0xBE,&MD))
 	{
-
-
 
 		// all reads completed successfully!
 		// compute floating-point polynominals
@@ -280,7 +278,7 @@ char SFE_BMP180::startTemperature(void)
 {
 	unsigned char data[2], result;
 	
-	data[0] = BMP180_CONTROL_REG;
+	data[0] = BMP180_REG_CONTROL;
 	data[1] = BMP180_COMMAND_TEMPERATURE;
 	result = writeBytes(data, 2);
 	if (result) // good write?
@@ -293,7 +291,7 @@ char SFE_BMP180::startPressure(char oversampling)
 {
 	unsigned char data[2], result, delay;
 	
-	data[0] = BMP180_CONTROL_REG;
+	data[0] = BMP180_REG_CONTROL;
 
 	switch (oversampling)
 	{
@@ -332,7 +330,7 @@ char SFE_BMP180::getTemperature(double *T)
 	double tu, a;
 	//char tempstring[20];
 	
-	data[0] = BMP180_RESULT_REG;
+	data[0] = BMP180_REG_RESULT;
 
 	result = readBytes(data, 2);
 	if (result) // good read, calculate temperature
@@ -373,7 +371,7 @@ char SFE_BMP180::getPressure(double *P, double *T)
 	double pu,s,x,y,z;
 	//char tempstring[20];
 	
-	data[0] = BMP180_RESULT_REG;
+	data[0] = BMP180_REG_RESULT;
 
 	result = readBytes(data, 3);
 	if (result) // good read, calculate pressure

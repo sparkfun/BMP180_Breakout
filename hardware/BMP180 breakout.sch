@@ -6909,7 +6909,6 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device="" value="VDDIO"/>
 <part name="LOGO1" library="SparkFun-Aesthetics" deviceset="LOGO-SFE" device="NW2"/>
 <part name="LOGO2" library="SparkFun-Aesthetics" deviceset="OSHW-LOGO" device="S"/>
-<part name="LOGO3" library="SparkFun-Aesthetics" deviceset="LOGO-SFE" device="SK"/>
 <part name="STANDOFF1" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF2" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 </parts>
@@ -6918,12 +6917,13 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <plain>
 <rectangle x1="94.615" y1="118.745" x2="98.425" y2="120.015" layer="94"/>
 <rectangle x1="159.385" y1="116.205" x2="160.655" y2="117.475" layer="94"/>
-<text x="172.72" y="7.62" size="2.54" layer="94">M Grusin</text>
+<text x="175.26" y="7.62" size="2.54" layer="94">M Grusin</text>
 <text x="104.14" y="119.38" size="1.778" layer="97">SHORT BOTH SIDES OF SJ1</text>
 <text x="104.14" y="116.84" size="1.778" layer="97">TO ENABLE PULL-UP RESISTORS</text>
 <text x="104.14" y="114.3" size="1.778" layer="97">ON I2C LINES</text>
 <text x="167.64" y="119.38" size="1.778" layer="97">SHORT SJ2 TO CONNECT VDD</text>
 <text x="167.64" y="116.84" size="1.778" layer="97">AND VDDIO TOGETHER</text>
+<text x="238.76" y="7.62" size="2.54" layer="94">1.0</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -6944,11 +6944,10 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <instance part="GND3" gate="1" x="154.94" y="78.74"/>
 <instance part="GND4" gate="1" x="165.1" y="78.74"/>
 <instance part="SUPPLY4" gate="1" x="96.52" y="127"/>
-<instance part="LOGO1" gate="G$1" x="137.16" y="7.62"/>
-<instance part="LOGO2" gate="G$1" x="132.08" y="25.4"/>
-<instance part="LOGO3" gate="G$1" x="124.46" y="7.62"/>
-<instance part="STANDOFF1" gate="G$1" x="114.3" y="7.62"/>
-<instance part="STANDOFF2" gate="G$1" x="114.3" y="12.7"/>
+<instance part="LOGO1" gate="G$1" x="241.3" y="17.78"/>
+<instance part="LOGO2" gate="G$1" x="132.08" y="12.7"/>
+<instance part="STANDOFF1" gate="G$1" x="236.22" y="20.32"/>
+<instance part="STANDOFF2" gate="G$1" x="236.22" y="17.78"/>
 </instances>
 <busses>
 </busses>
