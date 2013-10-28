@@ -79,6 +79,8 @@
 <layer number="105" name="tPlate" color="7" fill="1" visible="no" active="yes"/>
 <layer number="106" name="bPlate" color="7" fill="1" visible="no" active="yes"/>
 <layer number="107" name="Crop" color="7" fill="1" visible="no" active="yes"/>
+<layer number="108" name="tplace-old" color="10" fill="1" visible="yes" active="yes"/>
+<layer number="109" name="ref-old" color="11" fill="1" visible="yes" active="yes"/>
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="no" active="yes"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="7" fill="1" visible="no" active="yes"/>
@@ -5220,36 +5222,6 @@ This is the standard Spark Fun Electronics PCB logo.</description>
 </library>
 <library name="mike-temp">
 <packages>
-<package name="BMP180">
-<smd name="1" x="1.5" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="2" x="0" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="3" x="-1.5" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="4" x="-1.5" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="5" x="0" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="6" x="1.5" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
-<smd name="7" x="1.5" y="0" dx="0.5" dy="0.6" layer="1" rot="R180"/>
-<wire x1="-1.9" y1="1.8" x2="-1.9" y2="-1.8" width="0.127" layer="51"/>
-<wire x1="-1.9" y1="-1.8" x2="1.9" y2="-1.8" width="0.127" layer="51"/>
-<wire x1="1.9" y1="-1.8" x2="1.9" y2="1.8" width="0.127" layer="51"/>
-<wire x1="1.9" y1="1.8" x2="-1.9" y2="1.8" width="0.127" layer="51"/>
-<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="21"/>
-<wire x1="-1.5" y1="1" x2="-1.5" y2="-1" width="0.127" layer="51"/>
-<wire x1="-1.5" y1="-1" x2="-1" y2="-1.5" width="0.127" layer="51" curve="90"/>
-<wire x1="-1" y1="-1.5" x2="1" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="1" y1="-1.5" x2="1.5" y2="-1" width="0.127" layer="51" curve="90"/>
-<wire x1="1.5" y1="-1" x2="1.5" y2="1" width="0.127" layer="51"/>
-<wire x1="1.5" y1="1" x2="1" y2="1.5" width="0.127" layer="51" curve="90"/>
-<wire x1="1" y1="1.5" x2="-1" y2="1.5" width="0.127" layer="51"/>
-<wire x1="-1" y1="1.5" x2="-1.5" y2="1" width="0.127" layer="51" curve="90"/>
-<wire x1="-2" y1="1.875" x2="-2" y2="-1.875" width="0.127" layer="21"/>
-<wire x1="-2" y1="-1.875" x2="2" y2="-1.875" width="0.127" layer="21"/>
-<wire x1="2" y1="-1.875" x2="2" y2="1.875" width="0.127" layer="21"/>
-<wire x1="2" y1="1.875" x2="-2" y2="1.875" width="0.127" layer="21"/>
-<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="21"/>
-<text x="-2" y="2" size="1.27" layer="25">&gt;NAME</text>
-<text x="-2" y="-3.375" size="1.27" layer="27">&gt;VALUE</text>
-<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="51"/>
-</package>
 <package name="SJ_2W">
 <description>&lt;b&gt;Solder jumper&lt;/b&gt;</description>
 <wire x1="3.175" y1="-1.524" x2="-3.175" y2="-1.524" width="0.1524" layer="21"/>
@@ -5699,19 +5671,6 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </package>
 </packages>
 <symbols>
-<symbol name="BMP180">
-<pin name="VDD" x="15.24" y="2.54" length="middle" direction="pwr" rot="R180"/>
-<pin name="VDDIO" x="15.24" y="0" length="middle" direction="pwr" rot="R180"/>
-<pin name="SCL" x="-15.24" y="-2.54" length="middle" direction="in"/>
-<pin name="SDA" x="-15.24" y="2.54" length="middle"/>
-<pin name="GND" x="15.24" y="-2.54" length="middle" direction="pwr" rot="R180"/>
-<wire x1="-10.16" y1="5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
-<wire x1="10.16" y1="5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<text x="-10.16" y="5.715" size="1.778" layer="95">&gt;NAME</text>
-<text x="-10.16" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
-</symbol>
 <symbol name="SJ_2">
 <wire x1="-0.635" y1="-1.397" x2="0.635" y2="-1.397" width="1.27" layer="94" curve="180" cap="flat"/>
 <wire x1="-0.635" y1="1.397" x2="0.635" y2="1.397" width="1.27" layer="94" curve="-180" cap="flat"/>
@@ -5758,25 +5717,6 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="BMP180" prefix="U">
-<gates>
-<gate name="G$1" symbol="BMP180" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="BMP180">
-<connects>
-<connect gate="G$1" pin="GND" pad="7"/>
-<connect gate="G$1" pin="SCL" pad="5"/>
-<connect gate="G$1" pin="SDA" pad="6"/>
-<connect gate="G$1" pin="VDD" pad="2"/>
-<connect gate="G$1" pin="VDDIO" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="SOLDERJUMPER_2WAY" prefix="SJ" uservalue="yes">
 <description>&lt;b&gt;Solder Jumper&lt;/b&gt;
 2 way solder jumper</description>
@@ -6880,6 +6820,159 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 </deviceset>
 </devicesets>
 </library>
+<library name="SparkFun-Sensors">
+<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
+In this library you'll find sensors- accelerometers, gyros, compasses, magnetometers, light sensors, imagers, temp sensors, etc.&lt;br&gt;&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is the end user's responsibility to ensure correctness and suitablity for a given componet or application. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
+&lt;br&gt;&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; CC v3.0 Share-Alike You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="BMP180">
+<smd name="1" x="1.5" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="2" x="0" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="3" x="-1.5" y="1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="4" x="-1.5" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="5" x="0" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="6" x="1.5" y="-1.45" dx="0.5" dy="0.6" layer="1" rot="R90"/>
+<smd name="7" x="1.5" y="0" dx="0.5" dy="0.6" layer="1" rot="R180"/>
+<wire x1="-1.9" y1="1.8" x2="-1.9" y2="-1.8" width="0.127" layer="51"/>
+<wire x1="-1.9" y1="-1.8" x2="1.9" y2="-1.8" width="0.127" layer="51"/>
+<wire x1="1.9" y1="-1.8" x2="1.9" y2="1.8" width="0.127" layer="51"/>
+<wire x1="1.9" y1="1.8" x2="-1.9" y2="1.8" width="0.127" layer="51"/>
+<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="21"/>
+<wire x1="-1.5" y1="1" x2="-1.5" y2="-1" width="0.127" layer="51"/>
+<wire x1="-1.5" y1="-1" x2="-1" y2="-1.5" width="0.127" layer="51" curve="90"/>
+<wire x1="-1" y1="-1.5" x2="1" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="1" y1="-1.5" x2="1.5" y2="-1" width="0.127" layer="51" curve="90"/>
+<wire x1="1.5" y1="-1" x2="1.5" y2="1" width="0.127" layer="51"/>
+<wire x1="1.5" y1="1" x2="1" y2="1.5" width="0.127" layer="51" curve="90"/>
+<wire x1="1" y1="1.5" x2="-1" y2="1.5" width="0.127" layer="51"/>
+<wire x1="-1" y1="1.5" x2="-1.5" y2="1" width="0.127" layer="51" curve="90"/>
+<wire x1="-2" y1="1.875" x2="-2" y2="-1.875" width="0.127" layer="21"/>
+<wire x1="-2" y1="-1.875" x2="2" y2="-1.875" width="0.127" layer="21"/>
+<wire x1="2" y1="-1.875" x2="2" y2="1.875" width="0.127" layer="21"/>
+<wire x1="2" y1="1.875" x2="-2" y2="1.875" width="0.127" layer="21"/>
+<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="21"/>
+<text x="-2" y="2" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2" y="-3.375" size="1.27" layer="27">&gt;VALUE</text>
+<circle x="0.75" y="0.75" radius="0.125" width="0.6096" layer="51"/>
+</package>
+</packages>
+<symbols>
+<symbol name="BMP180">
+<description>BOSCH BMP180 DIGITAL BAROMETRIC PRESSURE SENSOR&lt;p&gt;
+
+Web page: &lt;a href="http://www.bosch-sensortec.com/en/homepage/products_3/environmental_sensors_1/bmp180_1/bmp180"&gt;http://www.bosch-sensortec.com/en/homepage/products_3/environmental_sensors_1/bmp180_1/bmp180&lt;/a&gt;&lt;br&gt;
+Datasheet: &lt;a href="http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf"&gt; http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf&lt;/a&gt;&lt;p&gt;
+
+The BMP180 is the function compatible successor of the BMP085, a new generation of high
+precision digital pressure sensors for consumer applications.&lt;p&gt;
+The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones,
+PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at
+fast conversion time, the BMP180 offers superior performance. The I2C interface allows for easy
+system integration with a microcontroller.&lt;p&gt;
+The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as
+well as long term stability.&lt;p&gt;
+
+Key features:&lt;p&gt;
+
+- Temperature measurement included&lt;br&gt;
+- I2C interface&lt;br&gt;
+- Fully calibrated&lt;br&gt;
+- Pb-free, halogen-free and RoHS compliant,&lt;br&gt;
+- MSL 1&lt;p&gt;
+
+Basic specs:&lt;p&gt;
+
+Pressure range: 300 to 1100hPa (+9000m to -500m relating to sea level)&lt;br&gt;
+Supply voltage: 1.8 to 3.6V (VDD), 1.62V to 3.6V (VDDIO)&lt;br&gt;
+Package: LGA package with metal lid&lt;br&gt;
+Small footprint: 3.6mm x 3.8mm&lt;br&gt;
+Super-flat: 0.93mm height&lt;br&gt;
+Low power: 5μA at 1 sample / sec. in standard mode&lt;br&gt;
+Low noise: 0.06hPa (0.5m) in ultra low power mode, 0.02hPa (0.17m) advanced resolution mode&lt;p&gt;
+
+Typical applications:&lt;p&gt;
+
+- Enhancement of GPS navigation (dead-reckoning, slope detection, etc.)&lt;br&gt;
+- In- and out-door navigation&lt;br&gt;
+- Leisure and sports&lt;br&gt;
+- Weather forecast&lt;br&gt;
+- Vertical velocity indication (rise/sink speed)</description>
+<pin name="VDD" x="15.24" y="5.08" length="middle" direction="pwr" rot="R180"/>
+<pin name="VDDIO" x="15.24" y="0" length="middle" direction="pwr" rot="R180"/>
+<pin name="SCL" x="-15.24" y="-2.54" length="middle" direction="in"/>
+<pin name="SDA" x="-15.24" y="2.54" length="middle"/>
+<pin name="GND" x="15.24" y="-5.08" length="middle" direction="pwr" rot="R180"/>
+<wire x1="-10.16" y1="7.62" x2="-10.16" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-7.62" x2="10.16" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-7.62" x2="10.16" y2="7.62" width="0.254" layer="94"/>
+<wire x1="10.16" y1="7.62" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
+<text x="-10.16" y="8.255" size="1.778" layer="95">&gt;NAME</text>
+<text x="-10.16" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="BMP180" prefix="U">
+<description>BOSCH BMP180 DIGITAL BAROMETRIC PRESSURE SENSOR&lt;p&gt;
+
+Web page: &lt;a href="http://www.bosch-sensortec.com/en/homepage/products_3/environmental_sensors_1/bmp180_1/bmp180"&gt;http://www.bosch-sensortec.com/en/homepage/products_3/environmental_sensors_1/bmp180_1/bmp180&lt;/a&gt;&lt;br&gt;
+Datasheet: &lt;a href="http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf"&gt; http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf&lt;/a&gt;&lt;p&gt;
+
+The BMP180 is the function compatible successor of the BMP085, a new generation of high
+precision digital pressure sensors for consumer applications.&lt;p&gt;
+The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones,
+PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at
+fast conversion time, the BMP180 offers superior performance. The I2C interface allows for easy
+system integration with a microcontroller.&lt;p&gt;
+The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as
+well as long term stability.&lt;p&gt;
+
+Key features:&lt;p&gt;
+
+- Temperature measurement included&lt;br&gt;
+- I2C interface&lt;br&gt;
+- Fully calibrated&lt;br&gt;
+- Pb-free, halogen-free and RoHS compliant,&lt;br&gt;
+- MSL 1&lt;p&gt;
+
+Basic specs:&lt;p&gt;
+
+Pressure range: 300 to 1100hPa (+9000m to -500m relating to sea level)&lt;br&gt;
+Supply voltage: 1.8 to 3.6V (VDD), 1.62V to 3.6V (VDDIO)&lt;br&gt;
+Package: LGA package with metal lid&lt;br&gt;
+Small footprint: 3.6mm x 3.8mm&lt;br&gt;
+Super-flat: 0.93mm height&lt;br&gt;
+Low power: 5μA at 1 sample / sec. in standard mode&lt;br&gt;
+Low noise: 0.06hPa (0.5m) in ultra low power mode, 0.02hPa (0.17m) advanced resolution mode&lt;p&gt;
+
+Typical applications:&lt;p&gt;
+
+- Enhancement of GPS navigation (dead-reckoning, slope detection, etc.)&lt;br&gt;
+- In- and out-door navigation&lt;br&gt;
+- Leisure and sports&lt;br&gt;
+- Weather forecast&lt;br&gt;
+- Vertical velocity indication (rise/sink speed)</description>
+<gates>
+<gate name="G$1" symbol="BMP180" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BMP180">
+<connects>
+<connect gate="G$1" pin="GND" pad="7"/>
+<connect gate="G$1" pin="SCL" pad="5"/>
+<connect gate="G$1" pin="SDA" pad="6"/>
+<connect gate="G$1" pin="VDD" pad="2"/>
+<connect gate="G$1" pin="VDDIO" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -6891,7 +6984,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 </classes>
 <parts>
 <part name="FRAME1" library="SparkFun-Aesthetics" deviceset="FRAME-LETTER" device=""/>
-<part name="U1" library="mike-temp" deviceset="BMP180" device=""/>
+<part name="U1" library="SparkFun-Sensors" deviceset="BMP180" device=""/>
 <part name="SJ1" library="mike-temp" deviceset="SOLDERJUMPER_2WAY" device="PASTE1&amp;2&amp;3"/>
 <part name="R1" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES" value="4.7K"/>
 <part name="R2" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES" value="4.7K"/>
@@ -6924,6 +7017,8 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <text x="167.64" y="119.38" size="1.778" layer="97">SHORT SJ2 TO CONNECT VDD</text>
 <text x="167.64" y="116.84" size="1.778" layer="97">AND VDDIO TOGETHER</text>
 <text x="238.76" y="7.62" size="2.54" layer="94">1.0</text>
+<text x="2.54" y="5.08" size="1.778" layer="97">Production note: DO NOT WASH</text>
+<text x="2.54" y="10.16" size="1.778" layer="97">See https://github.com/sparkfun/BMP180_Breakout for source files and example code</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -7005,15 +7100,15 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <junction x="154.94" y="116.84"/>
 <pinref part="SUPPLY2" gate="1" pin="VCC"/>
 <pinref part="U1" gate="G$1" pin="VDD"/>
-<wire x1="137.16" y1="101.6" x2="144.78" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="101.6" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="154.94" y1="101.6" x2="154.94" y2="93.98" width="0.1524" layer="91"/>
-<junction x="144.78" y="101.6"/>
-<wire x1="144.78" y1="101.6" x2="144.78" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="104.14" x2="144.78" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="104.14" x2="154.94" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="104.14" x2="154.94" y2="93.98" width="0.1524" layer="91"/>
+<junction x="144.78" y="104.14"/>
+<wire x1="144.78" y1="104.14" x2="144.78" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G$1" pin="+"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<wire x1="154.94" y1="116.84" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
-<junction x="154.94" y="101.6"/>
+<wire x1="154.94" y1="116.84" x2="154.94" y2="104.14" width="0.1524" layer="91"/>
+<junction x="154.94" y="104.14"/>
 </segment>
 <segment>
 <pinref part="JP1" gate="G$1" pin="2"/>
@@ -7024,8 +7119,8 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <net name="GND" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="GND"/>
-<wire x1="137.16" y1="96.52" x2="139.7" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="96.52" x2="139.7" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="93.98" x2="139.7" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="93.98" x2="139.7" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 <segment>
