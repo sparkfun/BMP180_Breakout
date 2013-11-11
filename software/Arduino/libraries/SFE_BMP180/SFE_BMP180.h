@@ -9,6 +9,10 @@
   http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
 
   Forked from BMP085 library by M.Grusin
+	
+	Our example code uses the "beerware" license. You can do anything
+	you like with this code. No really, anything. If you find it useful,
+	buy me a beer someday.
 
 	version 1.0 2013/09/20 initial version
 		
@@ -37,15 +41,15 @@
       status = pressure.startTemperature();
       if (status != 0)
       {
-	// wait for the measurement to complete
-	delay(status);
-	// retrieve the measurement
-	// note that the measurement is stored in the variable T
-	// use '&T' to provide the address of T to the function
-	// function returns 1 if successful, 0 if failure
-	status = pressure.getTemperature(&T);
-	if (status != 0)
-	{
+				// wait for the measurement to complete
+				delay(status);
+				// retrieve the measurement
+				// note that the measurement is stored in the variable T
+				// use '&T' to provide the address of T to the function
+				// function returns 1 if successful, 0 if failure
+				status = pressure.getTemperature(&T);
+				if (status != 0)
+				{
           // print out the measurement
           Serial.print("temp: ");
           Serial.print(T,2);

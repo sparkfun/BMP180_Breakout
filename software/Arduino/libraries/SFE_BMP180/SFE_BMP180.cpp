@@ -10,6 +10,10 @@
 
   Forked from BMP085 library by M.Grusin
 
+	Our example code uses the "beerware" license. You can do anything
+	you like with this code. No really, anything. If you find it useful,
+	buy me a beer someday.
+
 	version 1.0 2013/09/20 initial version
 	
   Example Code:
@@ -37,15 +41,15 @@
       status = pressure.startTemperature();
       if (status != 0)
       {
-	// wait for the measurement to complete
-	delay(status);
-	// retrieve the measurement
-	// note that the measurement is stored in the variable T
-	// use '&T' to provide the address of T to the function
-	// function returns 1 if successful, 0 if failure
-	status = pressure.getTemperature(&T);
-	if (status != 0)
-	{
+				// wait for the measurement to complete
+				delay(status);
+				// retrieve the measurement
+				// note that the measurement is stored in the variable T
+				// use '&T' to provide the address of T to the function
+				// function returns 1 if successful, 0 if failure
+				status = pressure.getTemperature(&T);
+				if (status != 0)
+				{
           // print out the measurement
           Serial.print("temp: ");
           Serial.print(T,2);
@@ -113,10 +117,12 @@
 SFE_BMP180::SFE_BMP180(char i2c_address)
 {
 	_i2c_address = i2c_address;
-//	Wire.begin();
+	//	Wire.begin();
 }
 
 char SFE_BMP180::begin()
+	// call pressure.begin() to initialize BMP180 before use
+	// returns 1 if success, 0 if failure (bad component or I2C bus shorted?)
 {
 	double c3,c4,b1;
 	
@@ -208,8 +214,9 @@ char SFE_BMP180::begin()
 	}
 }
 
-//value is address of a short (16-bit) int
+
 char SFE_BMP180::readInt(char address, int *value)
+	//value is address of a short (16-bit) int
 {
 	unsigned char data[2];
 
@@ -224,8 +231,9 @@ char SFE_BMP180::readInt(char address, int *value)
 	return(0);
 }
 
-//value is address of a short (16-bit) int
+
 char SFE_BMP180::readUInt(char address, unsigned int *value)
+	//value is address of a short (16-bit) int
 {
 	unsigned char data[2];
 
@@ -239,9 +247,10 @@ char SFE_BMP180::readUInt(char address, unsigned int *value)
 	return(0);
 }
 
-//values is an array of char, first entry should be the register to read from
-//subsequent entries will be filled with return values
+
 char SFE_BMP180::readBytes(unsigned char *values, char length)
+	//values is an array of char, first entry should be the register to read from
+	//subsequent entries will be filled with return values
 {
 	char x;
 
@@ -260,9 +269,10 @@ char SFE_BMP180::readBytes(unsigned char *values, char length)
 	return(0);
 }
 
-//value is an array of char, first entry should be the register to write to
-//subsequent entries will be values to write to that register
+
 char SFE_BMP180::writeBytes(unsigned char *values, char length)
+	//value is an array of char, first entry should be the register to write to
+	//subsequent entries will be values to write beginning at that register
 {
 	char x;
 	
@@ -274,7 +284,10 @@ char SFE_BMP180::writeBytes(unsigned char *values, char length)
 		return(0);
 }
 
+
 char SFE_BMP180::startTemperature(void)
+	// command BMP180 to start a temperature measurement
+	// returns n (number of ms to wait) for success, 0 for fail
 {
 	unsigned char data[2], result;
 	
@@ -287,7 +300,48 @@ char SFE_BMP180::startTemperature(void)
 		return(0); // or return 0 if there was a problem communicating with the BMP
 }
 
+
+char SFE_BMP180::getTemperature(double *T)
+	// return temperature measurement from previous startTemperature command
+	// places returned value in T variable (deg C)
+	// returns 1 for success, 0 for fail
+{
+	unsigned char data[2];
+	char result;
+	double tu, a;
+	//char tempstring[20];
+	
+	data[0] = BMP180_REG_RESULT;
+
+	result = readBytes(data, 2);
+	if (result) // good read, calculate temperature
+	{
+		tu = (data[0] * 256.0) + data[1];
+
+		//example from Bosch datasheet
+		//tu = 27898;
+
+		//example from http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
+		//tu = 0x69EC;
+		
+		a = c5 * (tu - c6);
+		*T = a + (mc / (a + md));
+
+		/*		
+		Serial.println();
+		Serial.print("tu: "); Serial.println(tu);
+		Serial.print("a: "); Serial.println(a);
+		Serial.print("T: "); Serial.println(*T);
+		*/
+	}
+	return(result);
+}
+
+
 char SFE_BMP180::startPressure(char oversampling)
+	// command BMP180 to start a pressure measurement
+	// oversampling: 0 - 3 for oversampling value
+	// returns n (number of ms to wait) for success, 0 for fail
 {
 	unsigned char data[2], result, delay;
 	
@@ -323,48 +377,19 @@ char SFE_BMP180::startPressure(char oversampling)
 		return(0); // or return 0 if there was a problem communicating with the BMP
 }
 
-char SFE_BMP180::getTemperature(double *T)
-{
-	unsigned char data[2];
-	char result;
-	double tu, a;
-	//char tempstring[20];
-	
-	data[0] = BMP180_REG_RESULT;
 
-	result = readBytes(data, 2);
-	if (result) // good read, calculate temperature
-	{
-		tu = (data[0] * 256.0) + data[1];
-
-		//example from Bosch datasheet
-		//tu = 27898;
-
-		//example from http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
-		//tu = 0x69EC;
-		
-		a = c5 * (tu - c6);
-		*T = a + (mc / (a + md));
-
-		/*		
-		Serial.println();
-		Serial.print("tu: "); Serial.println(tu);
-		Serial.print("a: "); Serial.println(a);
-		Serial.print("T: "); Serial.println(*T);
-		*/
-	}
-	return(result);
-}
-
-// getPressure()
-// retrieve and calculate abolute pressure in mbars
-// note that parameters are pointers to variables, call with "&var" to send addresses
-// requires begin() to have been called once to retrieve calibration parameters
-// requires recent temperature reading (startTemperature() / getTemperature()) to calculate pressure
-// requires startPressure() to have been called prior to calling getPressure()
-// return value will be 1 for success, 0 for I2C error
-// note that calculated pressure value is absolute mbars, to compensate for altitude call sealevel()
 char SFE_BMP180::getPressure(double *P, double *T)
+	// return absolute pressure measurement in mbars from previous startPressure command
+	// note: requires previous temperature measurement in variable T
+	// places returned value in P variable (mbar)
+	// returns 1 for success, 0 for fail
+
+	// note that parameters are pointers to variables, call with "&var" to send addresses
+	// requires begin() to have been called once to retrieve calibration parameters
+	// requires recent temperature reading (startTemperature() / getTemperature()) to calculate pressure
+	// requires startPressure() to have been called prior to calling getPressure()
+	// return value will be 1 for success, 0 for I2C error
+	// note that calculated pressure value is absolute mbars, to compensate for altitude call sealevel()
 {
 	unsigned char data[3];
 	char result;
@@ -404,16 +429,22 @@ char SFE_BMP180::getPressure(double *P, double *T)
 	return(result);
 }
 
-// sealevel()
-// given a pressure P (mb) taken at a specific altitude (meters), return the equivalent pressure (mb) at sea level
+
 double SFE_BMP180::sealevel(double P, double A)
+	// convert absolute pressure to sea-level pressure (as used in weather data)
+	// P: absolute pressure (mbar)
+	// A: current altitude (meters)
+	// returns sealevel pressure in mbar
 {
 	return(P / pow(1-(A/44330.0),5.255));
 }
 
-// altitude()
-// given a pressure measurement P (mb) and the pressure at a baseline P0 (mb), return altitude (meters) above baseline
+
 double SFE_BMP180::altitude(double P, double P0)
+	// convert absolute pressure to altitude (given baseline pressure; sea-level, runway, etc.)
+	// P: absolute pressure (mbar)
+	// P0: fixed baseline pressure (mbar)
+	// returns signed altitude in meters
 {
 	return(44330.0*(1-pow(P/P0,1/5.255)));
 }
