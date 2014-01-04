@@ -1,112 +1,19 @@
 /*
-  BMP180 pressure sensor library
-	
-  Mike Grusin
-  http://www.sparkfun.com
+	SFE_BMP180.cpp
+	Bosch BMP180 pressure sensor library for the Arduino microcontroller
+	Mike Grusin, SparkFun Electronics
 
-  Uses floating-point equations from the Weather Station Data Logger project
-  http://wmrx00.sourceforge.net/
-  http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
+	Uses floating-point equations from the Weather Station Data Logger project
+	http://wmrx00.sourceforge.net/
+	http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf
 
-  Forked from BMP085 library by M.Grusin
+	Forked from BMP085 library by M.Grusin
+
+	version 1.0 2013/09/20 initial version
 
 	Our example code uses the "beerware" license. You can do anything
 	you like with this code. No really, anything. If you find it useful,
-	buy me a beer someday.
-
-	version 1.0 2013/09/20 initial version
-	
-  Example Code:
-
-  #include <SFE_BMP180.h>
-  #include <Wire.h>
-
-  SFE_BMP180 pressure(BMP180_ADDR);
-
-  char status;
-  double T,P,p0,a;
-
-  Serial.begin(9600);
-  Serial.println("REBOOT");
-
-  // initialize the sensor (important to get calibration values stored on the device)
-  if (pressure.begin())
-  {
-    Serial.println("BMP180 init success");
-    while(1)
-    {
-      // tell the sensor to start a temperature measurement
-      // if request is successful, the number of ms to wait is returned
-      // if request is unsuccessful, 0 is returned
-      status = pressure.startTemperature();
-      if (status != 0)
-      {
-				// wait for the measurement to complete
-				delay(status);
-				// retrieve the measurement
-				// note that the measurement is stored in the variable T
-				// use '&T' to provide the address of T to the function
-				// function returns 1 if successful, 0 if failure
-				status = pressure.getTemperature(&T);
-				if (status != 0)
-				{
-          // print out the measurement
-          Serial.print("temp: ");
-          Serial.print(T,2);
-          Serial.println(" deg C");
-
-          // tell the sensor to start a pressure measurement
-          // the parameter is the oversampling setting, from 0 to 3 (highest res, longest wait)
-          // if request is successful, the number of ms to wait is returned
-          // if request is unsuccessful, 0 is returned
-          status = pressure.startPressure(3);
-          if (status != 0)
-          {
-            // wait for the measurement to complete
-            delay(status);
-            // retrieve the measurement
-            // note that the measurement is stored in the variable P
-            // use '&P' to provide the address of P
-            // note also that the function requires the previous temperature measurement (T)
-            // (if temperature is stable, you can do one temperature measurement for a number of pressure measurements)
-            // function returns 1 if successful, 0 if failure
-            status = pressure.getPressure(&P,&T);
-            if (status != 0)
-            {
-              // print out the measurement
-              Serial.print("pressure: ");
-              Serial.print(P,2);
-              Serial.println(" mb");
-
-              // the pressure sensor returns abolute pressure, which varies with altitude
-              // to remove the effects of altitude, use the sealevel function and your current altitude
-              // this number is commonly use in published weather data
-              p0 = pressure.sealevel(P,1655.0); // we're at 1655 meters (Boulder, CO)
-              Serial.print("sea-level pressure: ");
-              Serial.print(p0,2);
-              Serial.println(" mb");
-
-              // on the other hand, if you want to determine your altitude from the pressure reading,
-              // use the altitude function along with a baseline pressure (sea-level or other)
-              a = pressure.altitude(P,p0);
-              Serial.print("altitude above sea-level: ");
-              Serial.print(a,0);
-              Serial.println(" meters");
-            }
-            else Serial.println("error retrieving pressure measurement\n");
-          }
-          else Serial.println("error starting pressure measurement\n");
-        }
-        else Serial.println("error retrieving temperature measurement\n");
-      }
-      else Serial.println("error starting temperature measurement\n");
-
-      delay(10000);
-    }
-  }
-  else Serial.println("BMP180 init fail\n\n");
-
-
+	buy me a (root) beer someday.
 */
 
 #include <SFE_BMP180.h>
@@ -114,47 +21,56 @@
 #include <stdio.h>
 #include <math.h>
 
-SFE_BMP180::SFE_BMP180(char i2c_address)
+
+SFE_BMP180::SFE_BMP180()
+// Base library type
 {
-	_i2c_address = i2c_address;
-	//	Wire.begin();
 }
 
+
 char SFE_BMP180::begin()
-	// call pressure.begin() to initialize BMP180 before use
-	// returns 1 if success, 0 if failure (bad component or I2C bus shorted?)
+// Initialize library for subsequent pressure measurements
 {
 	double c3,c4,b1;
 	
+	// Start up the Arduino's "wire" (I2C) library:
+	
 	Wire.begin();
 
-	// get calibration data
+	// The BMP180 includes factory calibration data stored on the device.
+	// Each device has different numbers, these must be retrieved and
+	// used in the calculations when taking pressure measurements.
+
+	// Retrieve calibration data from device:
 	
-	if (readInt(0xAA,&AC1) &&
-		readInt(0xAC,&AC2) &&
-		readInt(0xAE,&AC3) &&
-		readUInt(0xB0,&AC4) &&
-		readUInt(0xB2,&AC5) &&
-		readUInt(0xB4,&AC6) &&
-		readInt(0xB6,&VB1) &&
-		readInt(0xB8,&VB2) &&
-		readInt(0xBA,&MB) &&
-		readInt(0xBC,&MC) &&
-		readInt(0xBE,&MD))
+	if (readInt(0xAA,AC1) &&
+		readInt(0xAC,AC2) &&
+		readInt(0xAE,AC3) &&
+		readUInt(0xB0,AC4) &&
+		readUInt(0xB2,AC5) &&
+		readUInt(0xB4,AC6) &&
+		readInt(0xB6,VB1) &&
+		readInt(0xB8,VB2) &&
+		readInt(0xBA,MB) &&
+		readInt(0xBC,MC) &&
+		readInt(0xBE,MD))
 	{
 
-		// all reads completed successfully!
-		// compute floating-point polynominals
-		
-		// example from Bosch datasheet
-		//AC1 = 408; AC2 = -72; AC3 = -14383; AC4 = 32741; AC5 = 32757; AC6 = 23153;
-		//B1 = 6190; B2 = 4; MB = -32768; MC = -8711; MD = 2868;
+		// All reads completed successfully!
 
-		// example from http://wmrx00.sourceforge.net/Arduino/BMP180-Calcs.pdf
-		//AC1 = 7911; AC2 = -934; AC3 = -14306; AC4 = 31567; AC5 = 25671; AC6 = 18974;
-		//VB1 = 5498; VB2 = 46; MB = -32768; MC = -11075; MD = 2432;
+		// If you need to check your math using known numbers,
+		// you can uncomment one of these examples.
+		// (The correct results are commented in the below functions.)
 
-		/*		
+		// Example from Bosch datasheet
+		// AC1 = 408; AC2 = -72; AC3 = -14383; AC4 = 32741; AC5 = 32757; AC6 = 23153;
+		// B1 = 6190; B2 = 4; MB = -32768; MC = -8711; MD = 2868;
+
+		// Example from http://wmrx00.sourceforge.net/Arduino/BMP180-Calcs.pdf
+		// AC1 = 7911; AC2 = -934; AC3 = -14306; AC4 = 31567; AC5 = 25671; AC6 = 18974;
+		// VB1 = 5498; VB2 = 46; MB = -32768; MC = -11075; MD = 2432;
+
+		/*
 		Serial.print("AC1: "); Serial.println(AC1);
 		Serial.print("AC2: "); Serial.println(AC2);
 		Serial.print("AC3: "); Serial.println(AC3);
@@ -167,6 +83,8 @@ char SFE_BMP180::begin()
 		Serial.print("MC: "); Serial.println(MC);
 		Serial.print("MD: "); Serial.println(MD);
 		*/
+		
+		// Compute floating-point polynominals:
 
 		c3 = 160.0 * pow(2,-15) * AC3;
 		c4 = pow(10,-3) * pow(2,-15) * AC4;
@@ -205,60 +123,67 @@ char SFE_BMP180::begin()
 		Serial.print("p2: "); Serial.println(p2);
 		*/
 		
+		// Success!
 		return(1);
 	}
 	else
 	{
-		// error reading calibration data; bad component or connection?
+		// Error reading calibration data; bad component or connection?
 		return(0);
 	}
 }
 
 
-char SFE_BMP180::readInt(char address, int *value)
-	//value is address of a short (16-bit) int
+char SFE_BMP180::readInt(char address, int &value)
+// Read a signed integer (two bytes) from device
+// address: register to start reading (plus subsequent register)
+// value: external variable to store data (function modifies value)
 {
 	unsigned char data[2];
 
 	data[0] = address;
 	if (readBytes(data,2))
 	{
-		*value = (((int)data[0]<<8)|(int)data[1]);
+		value = (((int)data[0]<<8)|(int)data[1]);
 		//if (*value & 0x8000) *value |= 0xFFFF0000; // sign extend if negative
 		return(1);
 	}
-	*value = 0;
+	value = 0;
 	return(0);
 }
 
 
-char SFE_BMP180::readUInt(char address, unsigned int *value)
-	//value is address of a short (16-bit) int
+char SFE_BMP180::readUInt(char address, unsigned int &value)
+// Read an unsigned integer (two bytes) from device
+// address: register to start reading (plus subsequent register)
+// value: external variable to store data (function modifies value)
 {
 	unsigned char data[2];
 
 	data[0] = address;
 	if (readBytes(data,2))
 	{
-		*value = (((unsigned int)data[0]<<8)|(unsigned int)data[1]);
+		value = (((unsigned int)data[0]<<8)|(unsigned int)data[1]);
 		return(1);
 	}
-	*value = 0;
+	value = 0;
 	return(0);
 }
 
 
 char SFE_BMP180::readBytes(unsigned char *values, char length)
-	//values is an array of char, first entry should be the register to read from
-	//subsequent entries will be filled with return values
+// Read an array of bytes from device
+// values: external array to hold data. Put starting register in values[0].
+// length: number of bytes to read
 {
 	char x;
 
-	Wire.beginTransmission(_i2c_address);
+	Wire.beginTransmission(BMP180_ADDR);
 	Wire.write(values[0]);
-	if (Wire.endTransmission() == 0);
+	_error = Wire.endTransmission();
+	if (_error == 0)
 	{
-		Wire.requestFrom(_i2c_address,length);
+		Wire.requestFrom(BMP180_ADDR,length);
 		while(Wire.available() != length) ; // wait until bytes are ready
 		for(x=0;x<length;x++)
 		{
@@ -271,14 +196,16 @@ char SFE_BMP180::readBytes(unsigned char *values, char length)
 
 
 char SFE_BMP180::writeBytes(unsigned char *values, char length)
-	//value is an array of char, first entry should be the register to write to
-	//subsequent entries will be values to write beginning at that register
+// Write an array of bytes to device
+// values: external array of data to write. Put starting register in values[0].
+// length: number of bytes to write
 {
 	char x;
 	
-	Wire.beginTransmission(_i2c_address);
+	Wire.beginTransmission(BMP180_ADDR);
 	Wire.write(values,length);
-	if (Wire.endTransmission() == 0)
+	_error = Wire.endTransmission();
+	if (_error == 0)
 		return(1);
 	else
 		return(0);
@@ -286,8 +213,8 @@ char SFE_BMP180::writeBytes(unsigned char *values, char length)
 
 
 char SFE_BMP180::startTemperature(void)
-	// command BMP180 to start a temperature measurement
-	// returns n (number of ms to wait) for success, 0 for fail
+// Begin a temperature reading.
+// Will return delay in ms to wait, or 0 if I2C error
 {
 	unsigned char data[2], result;
 	
@@ -301,15 +228,16 @@ char SFE_BMP180::startTemperature(void)
 }
 
 
-char SFE_BMP180::getTemperature(double *T)
-	// return temperature measurement from previous startTemperature command
-	// places returned value in T variable (deg C)
-	// returns 1 for success, 0 for fail
+char SFE_BMP180::getTemperature(double &T)
+// Retrieve a previously-started temperature reading.
+// Requires begin() to be called once prior to retrieve calibration parameters.
+// Requires startTemperature() to have been called prior and sufficient time elapsed.
+// T: external variable to hold result.
+// Returns 1 if successful, 0 if I2C error.
 {
 	unsigned char data[2];
 	char result;
 	double tu, a;
-	//char tempstring[20];
 	
 	data[0] = BMP180_REG_RESULT;
 
@@ -325,7 +253,7 @@ char SFE_BMP180::getTemperature(double *T)
 		//tu = 0x69EC;
 		
 		a = c5 * (tu - c6);
-		*T = a + (mc / (a + md));
+		T = a + (mc / (a + md));
 
 		/*		
 		Serial.println();
@@ -339,9 +267,9 @@ char SFE_BMP180::getTemperature(double *T)
 
 
 char SFE_BMP180::startPressure(char oversampling)
-	// command BMP180 to start a pressure measurement
-	// oversampling: 0 - 3 for oversampling value
-	// returns n (number of ms to wait) for success, 0 for fail
+// Begin a pressure reading.
+// Oversampling: 0 to 3, higher numbers are slower, higher-res outputs.
+// Will return delay in ms to wait, or 0 if I2C error.
 {
 	unsigned char data[2], result, delay;
 	
@@ -378,23 +306,21 @@ char SFE_BMP180::startPressure(char oversampling)
 }
 
 
-char SFE_BMP180::getPressure(double *P, double *T)
-	// return absolute pressure measurement in mbars from previous startPressure command
-	// note: requires previous temperature measurement in variable T
-	// places returned value in P variable (mbar)
-	// returns 1 for success, 0 for fail
+char SFE_BMP180::getPressure(double &P, double &T)
+// Retrieve a previously started pressure reading, calculate abolute pressure in mbars.
+// Requires begin() to be called once prior to retrieve calibration parameters.
+// Requires startPressure() to have been called prior and sufficient time elapsed.
+// Requires recent temperature reading to accurately calculate pressure.
 
-	// note that parameters are pointers to variables, call with "&var" to send addresses
-	// requires begin() to have been called once to retrieve calibration parameters
-	// requires recent temperature reading (startTemperature() / getTemperature()) to calculate pressure
-	// requires startPressure() to have been called prior to calling getPressure()
-	// return value will be 1 for success, 0 for I2C error
-	// note that calculated pressure value is absolute mbars, to compensate for altitude call sealevel()
+// P: external variable to hold pressure.
+// T: previously-calculated temperature.
+// Returns 1 for success, 0 for I2C error.
+
+// Note that calculated pressure value is absolute mbars, to compensate for altitude call sealevel().
 {
 	unsigned char data[3];
 	char result;
 	double pu,s,x,y,z;
-	//char tempstring[20];
 	
 	data[0] = BMP180_REG_RESULT;
 
@@ -409,11 +335,11 @@ char SFE_BMP180::getPressure(double *P, double *T)
 		//example from http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf, pu = 0x982FC0;	
 		//pu = (0x98 * 256.0) + 0x2F + (0xC0/256.0);
 		
-		s = *T - 25.0;
+		s = T - 25.0;
 		x = (x2 * pow(s,2)) + (x1 * s) + x0;
 		y = (y2 * pow(s,2)) + (y1 * s) + y0;
 		z = (pu - x) / y;
-		*P = (p2 * pow(z,2)) + (p1 * z) + p0;
+		P = (p2 * pow(z,2)) + (p1 * z) + p0;
 
 		/*
 		Serial.println();
@@ -431,20 +357,31 @@ char SFE_BMP180::getPressure(double *P, double *T)
 
 
 double SFE_BMP180::sealevel(double P, double A)
-	// convert absolute pressure to sea-level pressure (as used in weather data)
-	// P: absolute pressure (mbar)
-	// A: current altitude (meters)
-	// returns sealevel pressure in mbar
+// Given a pressure P (mb) taken at a specific altitude (meters),
+// return the equivalent pressure (mb) at sea level.
+// This produces pressure readings that can be used for weather measurements.
 {
-	return(P / pow(1-(A/44330.0),5.255));
+	return(P/pow(1-(A/44330.0),5.255));
 }
 
 
 double SFE_BMP180::altitude(double P, double P0)
-	// convert absolute pressure to altitude (given baseline pressure; sea-level, runway, etc.)
-	// P: absolute pressure (mbar)
-	// P0: fixed baseline pressure (mbar)
-	// returns signed altitude in meters
+// Given a pressure measurement P (mb) and the pressure at a baseline P0 (mb),
+// return altitude (meters) above baseline.
 {
 	return(44330.0*(1-pow(P/P0,1/5.255)));
 }
+
+
+char SFE_BMP180::getError(void)
+	// If any library command fails, you can retrieve an extended
+	// error code using this command. Errors are from the wire library: 
+	// 0 = Success
+	// 1 = Data too long to fit in transmit buffer
+	// 2 = Received NACK on transmit of address
+	// 3 = Received NACK on transmit of data
+	// 4 = Other error
+{
+	return(_error);
+}
+
