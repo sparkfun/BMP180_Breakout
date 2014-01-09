@@ -1,15 +1,15 @@
 BMP180_Breakout
 ===============
 
-Breakout board and example code for the Bosch BMP180 barometric pressure sensor
+Breakout board and example code for the Bosch BMP180 barometric pressure sensor.
 
 ![BMP180 Breakout](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/1/8/2/4/11824-01.jpg)
 
 Product page: [www.sparkfun.com/products/11824](https://www.sparkfun.com/products/11824)
 
-Datasheet: [https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true](https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true)
+Datasheet: [github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf](https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true)
 
-Github repository: [https://github.com/sparkfun/BMP180_Breakout)
+Github repository: [github.com/sparkfun/BMP180_Breakout](https://github.com/sparkfun/BMP180_Breakout)
 
 ###Arduino library installation:
 
@@ -59,10 +59,14 @@ These pins are different on different Arduino models:
 </table> 
 <p>
 Leave the IO (VDDIO) pin unconnected. This pin is for connecting
-the BMP180 to systems with lower logic levels such as 1.8V
+the BMP180 to systems with lower logic levels such as 1.8V.
 </li>
 <li>
-Start the Arduino IDE and connect your Arduino to your computer. This may require setting the COM port and board type.
+Connect your Arduino to your computer.
+<p>
+</li>
+<li>
+Start the Arduino IDE. Select the proper COM port and board type.
 <p>
 </li>
 <li>
@@ -104,7 +108,7 @@ Authors
 Acknowledgements
 ----------------
 
- * The SFE_BMP180 library uses [floating-point equations](http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf) developed by the [Weather Station Data Logger project](http://wmrx00.sourceforge.net/).
+ * The SFE_BMP180 library uses [floating-point equations](http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf) for the BMP085 developed by the [Weather Station Data Logger project](http://wmrx00.sourceforge.net/).
 
 Changelog
 ---------
