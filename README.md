@@ -3,15 +3,13 @@ BMP180_Breakout
 
 Breakout board and example code for the Bosch BMP180 barometric pressure sensor
 
-**Wrong picture:**
-
-![BMP180 Breakout](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/1/8/2/4/11282-01a.jpg)
+![BMP180 Breakout](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/1/8/2/4/11824-01.jpg)
 
 Product page: [www.sparkfun.com/products/11824](https://www.sparkfun.com/products/11824)
 
-Datasheet: [http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf](http://ae-bst.resource.bosch.com/media/products/dokumente/bmp180/BST-BMP180-DS000-09.pdf)
+Datasheet: [https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true](https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true)
 
-Github repository: [https://github.com/sparkfun/USB\_Weather\_Board](https://github.com/sparkfun/USB_Weather_Board)
+Github repository: [https://github.com/sparkfun/BMP180_Breakout)
 
 ###Arduino library installation:
 
@@ -39,7 +37,7 @@ These pins are different on different Arduino models:
 <p>
 <table>
 <tr>
-<td></td>
+<td>Any Arduino</td>
 <td>SDA&nbsp;</td>
 <td>SCL</td>
 </tr>
@@ -103,12 +101,18 @@ Authors
 
  * Mike Grusin, SparkFun Electronics
 
+Acknowledgements
+----------------
+
+ * The SFE_BMP180 library uses [floating-point equations](http://wmrx00.sourceforge.net/Arduino/BMP085-Calcs.pdf) developed by the [Weather Station Data Logger project](http://wmrx00.sourceforge.net/).
+
 Changelog
 ---------
 
 + hardware V10 (release)
 
 	* Minor updates
+	* Library fork from SFE_BMP085
 
 + hardware V02 (proto)
 
