@@ -7,7 +7,7 @@ Breakout board and example code for the Bosch BMP180 barometric pressure sensor.
 
 Product page: [www.sparkfun.com/products/11824](https://www.sparkfun.com/products/11824)
 
-Datasheet: [github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf](https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true)
+Datasheet: [github.com/sparkfun/BMP180_Breakout/blob/master/BMP180 Datasheet V2.5.pdf](https://github.com/sparkfun/BMP180_Breakout/blob/master/BMP180%20Datasheet%20V2.5.pdf?raw=true)
 
 Github repository: [github.com/sparkfun/BMP180_Breakout](https://github.com/sparkfun/BMP180_Breakout)
 
