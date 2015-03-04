@@ -134,7 +134,7 @@ char SFE_BMP180::begin()
 }
 
 
-char SFE_BMP180::readInt(char address, int &value)
+char SFE_BMP180::readInt(char address, int16_t &value)
 // Read a signed integer (two bytes) from device
 // address: register to start reading (plus subsequent register)
 // value: external variable to store data (function modifies value)
@@ -144,7 +144,7 @@ char SFE_BMP180::readInt(char address, int &value)
 	data[0] = address;
 	if (readBytes(data,2))
 	{
-		value = (((int)data[0]<<8)|(int)data[1]);
+		value = (((int16_t)data[0]<<8)|(int16_t)data[1]);
 		//if (*value & 0x8000) *value |= 0xFFFF0000; // sign extend if negative
 		return(1);
 	}
@@ -153,7 +153,7 @@ char SFE_BMP180::readInt(char address, int &value)
 }
 
 
-char SFE_BMP180::readUInt(char address, unsigned int &value)
+char SFE_BMP180::readUInt(char address, uint16_t &value)
 // Read an unsigned integer (two bytes) from device
 // address: register to start reading (plus subsequent register)
 // value: external variable to store data (function modifies value)
@@ -163,7 +163,7 @@ char SFE_BMP180::readUInt(char address, unsigned int &value)
 	data[0] = address;
 	if (readBytes(data,2))
 	{
-		value = (((unsigned int)data[0]<<8)|(unsigned int)data[1]);
+		value = (((uint16_t)data[0]<<8)|(uint16_t)data[1]);
 		return(1);
 	}
 	value = 0;
