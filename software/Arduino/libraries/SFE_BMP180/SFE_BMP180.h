@@ -77,13 +77,13 @@ class SFE_BMP180
 
 	private:
 	
-		char readInt(char address, int &value);
+		char readInt(char address, int16_t &value);
 			// read an signed int (16 bits) from a BMP180 register
 			// address: BMP180 register address
 			// value: external signed int for returned value (16 bits)
 			// returns 1 for success, 0 for fail, with result in value
 
-		char readUInt(char address, unsigned int &value);
+		char readUInt(char address, uint16_t &value);
 			// read an unsigned int (16 bits) from a BMP180 register
 			// address: BMP180 register address
 			// value: external unsigned int for returned value (16 bits)
@@ -101,8 +101,8 @@ class SFE_BMP180
 			// length: number of bytes to write
 			// returns 1 for success, 0 for fail
 			
-		int AC1,AC2,AC3,VB1,VB2,MB,MC,MD;
-		unsigned int AC4,AC5,AC6; 
+		int16_t AC1,AC2,AC3,VB1,VB2,MB,MC,MD;
+		uint16_t AC4,AC5,AC6; 
 		double c5,c6,mc,md,x0,x1,x2,y0,y1,y2,p0,p1,p2;
 		char _error;
 };
