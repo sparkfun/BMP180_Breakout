@@ -31,7 +31,7 @@ Products that use this Library
 Version History
 ---------------
 
-* [V_1.1.0](https://github.com/sparkfun/BMP180_Breakout/tree/V_1.1.0) - Updated to new library structure
+* [V_1.1.0](https://github.com/sparkfun/BMP180_Breakout_Arduino_Library/tree/V_1.1.0) - Updated to new library structure
 * V_1.0.0 - Untracked version
 
 License Information
