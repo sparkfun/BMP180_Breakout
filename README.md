@@ -15,11 +15,10 @@ Github repository: [github.com/sparkfun/BMP180_Breakout](https://github.com/spar
 
 This archive contains an Arduino library and example sketch showing how to use this sensor. The library must be installed onto your computer in order for the example code to work correctly.
 
-If you haven't, install the free Arduino IDE (Integrated Development Environment), available at [www.arduino.cc](http://www.arduino.cc). This code was tested using Arduino version 1.0.5.
+If you haven't, install the free Arduino IDE (Integrated Development Environment), available at [www.arduino.cc](http://www.arduino.cc). This code was written using Arduino version 1.0.5. and updated to be used with the Arduino library manager of version 1.6.3.
 
-TL;DR: The one-step procedure to install all of the required files is to open the "Arduino" folder contained in this archive, and drag the contents into your personal Arduino sketch folder (this is normally located in your personal documents folder). This will create a "libraries" folder containing the required library and example sketch.
+To install without the manager, download the Arduino folder then use the Arduino IDE to add it.  From the IDE, go Sketch->Include Library->"Add .ZIP Library", then choose the Arduino folder that was downloaded.  The IDE will pick proper names from the library.properties file and put the libraries in your user sketch folder.
 
-If you get a warning that there is already a "libraries" folder, go ahead and add the included files to it. If there is an older version of this library in the folder, please overwrite it with the version in this archive. If it is running, restart the Arduino IDE to get it to recognize the new library.
 
 ###Running the example sketch:
 
