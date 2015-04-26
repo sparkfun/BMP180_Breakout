@@ -1,17 +1,16 @@
-SparkFun <PRODUCT NAME> Arduino Library
+SparkFun BMP180_Breakout Arduino Library
 ========================================
 
-![SparkFun Part Name](URL for picture of part)
+![BMP180 Breakout](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/1/8/2/4/11824-01.jpg)
 
-[*SparkFun Part Name (SKU)*](URL for product on Sparkfun.com)
+[*SEN-11824*](https://www.sparkfun.com/products/11824)
 
-<Basic description of the library.>
+This archive contains an Arduino library and example sketch showing how to use this sensor. The library must be installed onto your computer in order for the example code to work correctly.
 
 Repository Contents
 -------------------
 
 * **/examples** - Example sketches for the library (.ino). Run these from the Arduino IDE. 
-* **/extras** - Additional documentation for the user. These files are ignored by the IDE. 
 * **/src** - Source files for the library (.cpp, .h).
 * **keywords.txt** - Keywords from this library that will be highlighted in the Arduino IDE. 
 * **library.properties** - General library properties for the Arduino package manager. 
@@ -19,21 +18,21 @@ Repository Contents
 Documentation
 --------------
 
-* **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
-* **[Product Repository](GitHub Product URL)** - Main repository (including hardware files) for the <PRODUCT NAME>.
-* **[Hookup Guide](Learn.SparkFun URL)** - Basic hookup guide for the <PRODUCT NAME>.
+* **[*Installing an Arduino Library* Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
+* **[Product Repository](https://github.com/sparkfun/BMP180_Breakout)** - Main repository (including hardware files) for the <PRODUCT NAME>.
+* **[Hookup Guide](https://learn.sparkfun.com/tutorials/bmp180-barometric-pressure-sensor-hookup-?_ga=1.15578495.831177436.1424112780)** - Basic hookup guide for the BMP180 Breakout.
 
 Products that use this Library 
 ---------------------------------
 
-* [Part SKU](SparkFun part URL)- Basic part and short description here
-* [Part SKU](SparkFun part URL)- Basic part and short description here
+* [SEN-11824](https://www.sparkfun.com/products/11824) - BMP180 Barometric Pressure Sensor Breakout
+
 
 Version History
 ---------------
 
-* [vExxFxxZxxHxxLxxSxx](URL for tag specific to this version) - Description 
-* [vEyyFyyZyyHyyLyySyy](URL for tag specific to this version) - Description
+* [V_1.1.0](https://github.com/sparkfun/BMP180_Breakout/tree/V_1.1.0) - Updated to new library structure
+* V_1.0.0 - Untracked version
 
 License Information
 -------------------
@@ -46,6 +45,4 @@ Please use, reuse, and modify these files as you see fit. Please maintain attrib
 
 Distributed as-is; no warranty is given.
 
-- Your friends at SparkFun.
-
-_<COLLABORATION CREDIT>_
+\- Your friends at SparkFun.
