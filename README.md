@@ -111,7 +111,10 @@ Acknowledgements
 
 Changelog
 ---------
-
++ Release [V_1.1.0](https://github.com/sparkfun/BMP180_Breakout/tree/V_1.1.1)
+	* Restructred for arduino IDE
+	* Pulled in library
+	
 + hardware V10 (release)
 
 	* Minor updates
