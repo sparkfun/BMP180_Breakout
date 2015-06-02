@@ -1,4 +1,4 @@
-SparkFun <PRODUCT NAME> Libraries
+SparkFun BMP180 Libraries
 =================================
 
 Libraries for use in different environments. 
@@ -21,8 +21,8 @@ Distributed as-is; no warranty is given.
 
 
 
-BUILD INSTRUCTIONS: 
+Update Library Instructions:
+----------------------------
+To get the most up-to-date version of the library, you must run the following git subtree commands. 
 
-$git subtree add -P <DIRECTORY NAME> --squash <git repo URL> <ref>
-
-$git subtree pull -P <DIRECTORY NAME> --squash <git repo URL> <ref>
+$git subtree pull -P Libraries/Arduino --squash git@github.com:sparkfun/BMP180_Breakout_Arduino_Library.git master
