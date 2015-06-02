@@ -10,6 +10,7 @@
 	Forked from BMP085 library by M.Grusin
 
 	version 1.0 2013/09/20 initial version
+	Verison 1.1.2 - Updated for Arduino 1.6.4 5/2015
 
 	Our example code uses the "beerware" license. You can do anything
 	you like with this code. No really, anything. If you find it useful,
@@ -144,7 +145,7 @@ char SFE_BMP180::readInt(char address, int16_t &value)
 	data[0] = address;
 	if (readBytes(data,2))
 	{
-		value = (((int16_t)data[0]<<8)|(int16_t)data[1]);
+		value = (int16_t)((data[0]<<8)|data[1]);
 		//if (*value & 0x8000) *value |= 0xFFFF0000; // sign extend if negative
 		return(1);
 	}

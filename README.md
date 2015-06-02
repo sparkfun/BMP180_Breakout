@@ -19,8 +19,8 @@ Documentation
 --------------
 
 * **[*Installing an Arduino Library* Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
-* **[Product Repository](https://github.com/sparkfun/BMP180_Breakout)** - Main repository (including hardware files) for the <PRODUCT NAME>.
-* **[Hookup Guide](https://learn.sparkfun.com/tutorials/bmp180-barometric-pressure-sensor-hookup-?_ga=1.15578495.831177436.1424112780)** - Basic hookup guide for the BMP180 Breakout.
+* **[Product Repository](https://github.com/sparkfun/BMP180_Breakout)** - Main repository (including hardware files) for the BMP180 Breakout.
+* **[Hookup Guide](https://learn.sparkfun.com/tutorials/bmp180-barometric-pressure-sensor-hookup)** - Basic hookup guide for the BMP180 Breakout.
 
 Products that use this Library 
 ---------------------------------
@@ -30,7 +30,7 @@ Products that use this Library
 
 Version History
 ---------------
-
+* [V_1.1.2](https://github.com/sparkfun/BMP180_Breakout_Arduino_Library/tree/V_1.1.2) - Small patch on integers, cleaning up library files.
 * [V_1.1.1](https://github.com/sparkfun/BMP180_Breakout_Arduino_Library/tree/V_1.1.1) - Updated library.properties file
 * [V_1.1.0](https://github.com/sparkfun/BMP180_Breakout_Arduino_Library/tree/V_1.1.0) - Updated to new library structure
 * V_1.0.0 - Untracked version

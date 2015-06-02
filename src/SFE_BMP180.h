@@ -10,6 +10,7 @@
 	Forked from BMP085 library by M.Grusin
 
 	version 1.0 2013/09/20 initial version
+	Verison 1.1.2 - Updated for Arduino 1.6.4 5/2015
 	
 	Our example code uses the "beerware" license. You can do anything
 	you like with this code. No really, anything. If you find it useful,
