@@ -40,6 +40,8 @@ you like with this code. No really, anything. If you find it useful,
 buy me a beer someday.
 
 V10 Mike Grusin, SparkFun Electronics 10/24/2013
+V1.1.2 Updates for Arduino 1.6.4 5/2015
+
 */
 
 // Your sketch must #include this library, and the Wire library.
