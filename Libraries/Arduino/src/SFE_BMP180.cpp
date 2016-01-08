@@ -37,6 +37,12 @@ char SFE_BMP180::begin()
 	// Start up the Arduino's "wire" (I2C) library:
 	
 	Wire.begin();
+#if defined(ESP8266)
+	Wire.begin(0, 2);
+#else
+	Wire.begin();
+#endif
+
 
 	// The BMP180 includes factory calibration data stored on the device.
 	// Each device has different numbers, these must be retrieved and
