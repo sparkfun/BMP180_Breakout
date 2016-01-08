@@ -36,7 +36,6 @@ char SFE_BMP180::begin()
 	
 	// Start up the Arduino's "wire" (I2C) library:
 	
-	Wire.begin();
 #if defined(ESP8266)
 	Wire.begin(0, 2);
 #else
