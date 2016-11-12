@@ -177,7 +177,7 @@ char SFE_BMP180::readBytes(unsigned char *values, char length)
 // values: external array to hold data. Put starting register in values[0].
 // length: number of bytes to read
 {
-	int x;
+	uint8_t x;
 
 	Wire.beginTransmission(BMP180_ADDR);
 	Wire.write(values[0]);
