@@ -53,6 +53,8 @@ V1.1.2 Updates for Arduino 1.6.4 5/2015
 // You will need to create an SFE_BMP180 object, here called "pressure":
 
 SFE_BMP180 pressure;
+// or "&Wire1" to Arduino DUE
+// SFE_BMP180 pressure(&Wire1);
 
 double baseline; // baseline pressure
 
@@ -60,7 +62,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("REBOOT");
-
+  
   // Initialize the sensor (it is important to get calibration values stored on the device).
 
   if (pressure.begin())
