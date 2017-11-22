@@ -26,10 +26,13 @@
 #include "WProgram.h"
 #endif
 
+#include <Wire.h>
+
 class SFE_BMP180
 {
 	public:
 		SFE_BMP180(); // base type
+		SFE_BMP180(TwoWire *_twi); // base type
 
 		char begin();
 			// call pressure.begin() to initialize BMP180 before use
@@ -106,6 +109,8 @@ class SFE_BMP180
 		uint16_t AC4,AC5,AC6; 
 		double c5,c6,mc,md,x0,x1,x2,y0,y1,y2,p0,p1,p2;
 		char _error;
+	
+		TwoWire *twi;
 };
 
 #define BMP180_ADDR 0x77 // 7-bit address
