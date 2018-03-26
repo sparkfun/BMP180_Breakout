@@ -7,6 +7,7 @@ Libraries for use in different environments.
 Directory Contents
 -------------------
 * **/Arduino** - [Arduino IDE](http://www.arduino.cc/en/Main/Software) libraries
+* **/Teensy** - [Teensyduino IDE](https://www.pjrc.com/store/teensy35.html) libraries
 
 
 License Information
