@@ -11,7 +11,8 @@ Datasheet: [github.com/sparkfun/BMP180_Breakout/blob/master/BMP180 Datasheet V2.
 
 Github repository: [github.com/sparkfun/BMP180_Breakout](https://github.com/sparkfun/BMP180_Breakout)
 
-###Arduino library installation:
+Arduino library installation:
+-------------------
 
 This archive contains an Arduino library and example sketch showing how to use this sensor. The library must be installed onto your computer in order for the example code to work correctly.
 
@@ -19,11 +20,13 @@ If you haven't, install the free Arduino IDE (Integrated Development Environment
 
 To install without the manager, download the Arduino folder then use the Arduino IDE to add it.  From the IDE, go Sketch->Include Library->"Add .ZIP Library", then choose the Arduino folder that was downloaded.  The IDE will pick proper names from the library.properties file and put the libraries in your user sketch folder.
 
-###Teensy library installation:
+Teensy library installation:
+-------------------
 
 [A. Faruk](https://github.com/unalfaruk) was kind enough to create a version of this library for the [Teensy](https://www.pjrc.com/teensy/) microcontroller family. You can find information on installation and use of this library at: https://github.com/sparkfun/BMP180_Breakout/tree/master/Libraries/Teensy
 
-###Running the example sketch:
+Running the example sketch:
+-------------------
 
 <ol start=1>
 <li>Connect the BMP180 breakout board to your Arduino. You can solder wires, use jumper wires and headers, etc.
