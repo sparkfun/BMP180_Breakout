@@ -4,22 +4,25 @@
 	Bosch BMP180 pressure sensor library for the Teensy microcontroller.
 	unalfaruk.com / A.Faruk UNAL / ahmet@unalfaruk.com || unalfaruk@outlook.com
 	This library depends on SparkFUN BMP180 library and https://roboticboat.uk/Teensy/Teensy36/BMP180.html page.
-	
+
 	---
 */
 
 #ifndef Teensy_BMP180_h
 #define Teensy_BMP180_h
-#include <Wire.h>
+#include "Wire.h"
 class Teensy_BMP180
 {
 	public:
-		Teensy_BMP180(); // base type
+
+		Teensy_BMP180(TwoWire *hwWire){
+			WireSelected=hwWire;
+		} // base type
 
 		void begin();
 			// call pressure.begin() to initialize BMP180 before use
 			// returns 1 if success, 0 if failure (bad component or I2C bus shorted?)
-		
+
 		char startTemperature(void);
 			// command BMP180 to start a temperature measurement
 			// returns (number of ms to wait) for success, 0 for fail
@@ -49,7 +52,7 @@ class Teensy_BMP180
 
 
 	private:
-	
+
 		char readInt(char address, int16_t &value);
 			// read an signed int (16 bits) from a BMP180 register
 			// address: BMP180 register address
@@ -62,7 +65,7 @@ class Teensy_BMP180
 			// value: external unsigned int for returned value (16 bits)
 			// returns 1 for success, 0 for fail, with result in value
 
-			
+
 		int16_t AC1,AC2,AC3,VB1,VB2,MB,MC,MD;
 		uint16_t AC4,AC5,AC6;
 
@@ -70,6 +73,8 @@ class Teensy_BMP180
 		double xx0,xx1,xx2;
 		double yy0,yy1,yy2;
 		double p0,p1,p2;
+
+		TwoWire *WireSelected;
 };
 
 //Address of the BMP180 address

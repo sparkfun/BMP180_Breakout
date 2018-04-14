@@ -4,21 +4,13 @@
 	Bosch BMP180 pressure sensor library for the Teensy microcontroller.
 	unalfaruk.com / A.Faruk UNAL / ahmet@unalfaruk.com || unalfaruk@outlook.com
 	This library depends on SparkFUN BMP180 library and https://roboticboat.uk/Teensy/Teensy36/BMP180.html page.
-	
+
 	---
 */
-
 #include <Teensy_BMP180.h>
-#include <Wire.h>
 #include <stdio.h>
+#include <Wire.h>
 #include <math.h>
-
-
-Teensy_BMP180::Teensy_BMP180()
-// Base library type
-{
-	
-}
 
 
 void Teensy_BMP180::begin()
@@ -28,7 +20,7 @@ void Teensy_BMP180::begin()
 	double c3,c4,b1;
 
 	//Start the wire library
-	Wire.begin();
+	WireSelected->begin();
 
 	//Read the BMP180 factory settings
 	if (readInt(0xAA,AC1) &&
@@ -81,28 +73,28 @@ char Teensy_BMP180::readInt(char registerAddress, int16_t &value)
 	unsigned char byteLow;
 
 	// Begin communication with BMP180
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register you want some data
-	Wire.write(registerAddress);
-	  
-	//If false, endTransmission() sends a restart message after transmission. The bus will not be released, 
-	//which prevents another master device from transmitting between messages. This allows one master device 
+	WireSelected->write(registerAddress);
+
+	//If false, endTransmission() sends a restart message after transmission. The bus will not be released,
+	//which prevents another master device from transmitting between messages. This allows one master device
 	//to send multiple transmissions while in control. The default value is true.
-	int nackCatcher = Wire.endTransmission(false);
+	int nackCatcher = WireSelected->endTransmission(false);
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
 
 	// Request 2 bytes from BMP180
-	Wire.requestFrom(_i2cAddress , _TWO_BYTES); 
+	WireSelected->requestFrom(_i2cAddress , _TWO_BYTES);
 
 	// Wait for the bytes to arrive
-	while(Wire.available() < _TWO_BYTES);
+	while(WireSelected->available() < _TWO_BYTES);
 
 	// Read the values
-	byteHigh = Wire.read(); 
-	byteLow = Wire.read();
+	byteHigh = WireSelected->read();
+	byteLow = WireSelected->read();
 
 	value = (((int16_t)byteHigh <<8) + (int16_t)byteLow);
 
@@ -122,28 +114,28 @@ char Teensy_BMP180::readUInt(char registerAddress, uint16_t &value)
 	unsigned char byteLow;
 
 	// Begin communication with BMP180
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register you want some data
-	Wire.write(registerAddress);
+	WireSelected->write(registerAddress);
 
-	//If false, endTransmission() sends a restart message after transmission. The bus will not be released, 
-	//which prevents another master device from transmitting between messages. This allows one master device 
+	//If false, endTransmission() sends a restart message after transmission. The bus will not be released,
+	//which prevents another master device from transmitting between messages. This allows one master device
 	//to send multiple transmissions while in control. The default value is true.
-	int nackCatcher = Wire.endTransmission(false);
+	int nackCatcher = WireSelected->endTransmission(false);
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
 
 	// Request 2 bytes from BMP180
-	Wire.requestFrom(_i2cAddress , _TWO_BYTES); 
+	WireSelected->requestFrom(_i2cAddress , _TWO_BYTES);
 
 	// Wait for the bytes to arrive
-	while(Wire.available() < _TWO_BYTES);
+	while(WireSelected->available() < _TWO_BYTES);
 
 	// Read the values
-	byteHigh = Wire.read(); 
-	byteLow = Wire.read();
+	byteHigh = WireSelected->read();
+	byteLow = WireSelected->read();
 
 	value = (((uint16_t)byteHigh <<8) + (uint16_t)byteLow);
 
@@ -159,14 +151,14 @@ char Teensy_BMP180::startTemperature(void)
 // Will return delay in ms to wait, or 0 if I2C error
 {
 	// Begin communication with BMP180
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register an instruction
-	Wire.write(_Register_CONTROL);
-	Wire.write(_COMMAND_TEMPERATURE);
+	WireSelected->write(_Register_CONTROL);
+	WireSelected->write(_COMMAND_TEMPERATURE);
 
 	//End transmission and release the bus. The default value is true.
-	int nackCatcher = Wire.endTransmission();
+	int nackCatcher = WireSelected->endTransmission();
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
@@ -192,28 +184,28 @@ char Teensy_BMP180::getTemperature(double &T)
 	delay(5);
 
 	// Begin communication with BMP180
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register you want some data
-	Wire.write(_Register_RESULT);
+	WireSelected->write(_Register_RESULT);
 
-	//If false, endTransmission() sends a restart message after transmission. The bus will not be released, 
-	//which prevents another master device from transmitting between messages. This allows one master device 
+	//If false, endTransmission() sends a restart message after transmission. The bus will not be released,
+	//which prevents another master device from transmitting between messages. This allows one master device
 	//to send multiple transmissions while in control. The default value is true.
-	int nackCatcher = Wire.endTransmission(false);
+	int nackCatcher = WireSelected->endTransmission(false);
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
 
 	// Request 2 bytes from BMP180
-	Wire.requestFrom(_i2cAddress , _TWO_BYTES); 
+	WireSelected->requestFrom(_i2cAddress , _TWO_BYTES);
 
 	// Wait for the bytes to arrive
-	while(Wire.available() < _TWO_BYTES);
+	while(WireSelected->available() < _TWO_BYTES);
 
 	// Read the values
-	byteHigh = Wire.read(); 
-	byteLow = Wire.read();
+	byteHigh = WireSelected->read();
+	byteLow = WireSelected->read();
 
 	// Calculate the temperature
 	tu = (byteHigh << 8) + byteLow;
@@ -233,14 +225,14 @@ char Teensy_BMP180::startPressure(void)
 // Will return delay in ms to wait, or 0 if I2C error.
 {
 	// Begin a pressure reading.
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register an instruction
-	Wire.write(_Register_CONTROL);
-	Wire.write(_COMMAND_PRESSURE);
+	WireSelected->write(_Register_CONTROL);
+	WireSelected->write(_COMMAND_PRESSURE);
 
 	//End transmission and release the bus. The default value is true.
-	int nackCatcher = Wire.endTransmission();
+	int nackCatcher = WireSelected->endTransmission();
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
@@ -271,29 +263,29 @@ char Teensy_BMP180::getPressure(double &P, double &T)
 		delay(26);
 
 	// Begin communication with BMP180
-	Wire.beginTransmission(_i2cAddress);
+	WireSelected->beginTransmission(_i2cAddress);
 
 	// Tell register you want some data
-	Wire.write(_Register_RESULT);
+	WireSelected->write(_Register_RESULT);
 
-	//If false, endTransmission() sends a restart message after transmission. The bus will not be released, 
-	//which prevents another master device from transmitting between messages. This allows one master device 
+	//If false, endTransmission() sends a restart message after transmission. The bus will not be released,
+	//which prevents another master device from transmitting between messages. This allows one master device
 	//to send multiple transmissions while in control. The default value is true.
-	int nackCatcher = Wire.endTransmission();
+	int nackCatcher = WireSelected->endTransmission();
 
 	// Return if we have a connection problem
 	if (nackCatcher != 0) {return 0;}
 
 	// Request 3 bytes from BMP180
-	Wire.requestFrom(_i2cAddress , _THREE_BYTES); 
+	WireSelected->requestFrom(_i2cAddress , _THREE_BYTES);
 
 	// Wait for the bytes to arrive
-	while(Wire.available() < _THREE_BYTES);
+	while(WireSelected->available() < _THREE_BYTES);
 
 	// Read the values
-	byteHigh = Wire.read(); 
-	byteMid = Wire.read();
-	byteLow = Wire.read();
+	byteHigh = WireSelected->read();
+	byteMid = WireSelected->read();
+	byteLow = WireSelected->read();
 
 	// Calculate absolute pressure in mbars.
 	pu = (byteHigh * 256.0) + byteMid + (byteLow/256.0);
@@ -313,6 +305,3 @@ double Teensy_BMP180::altitude(double P, double P0)
 {
 	return(44330.0*(1-pow(P/P0,1/5.255)));
 }
-
-
-
