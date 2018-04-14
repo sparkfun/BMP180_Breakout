@@ -5,8 +5,8 @@ This archive contains an Teensy library and example sketch showing how to use th
 
 Info About Update
 -------------------
-* **Wire** library support using pointer now so BMP180 can be connected to the i2c interface specified by the user. Also, Arduino devices are supported, even those with multiple i2c interfaces. So, same sketches can be run on Arduino and Teensy. (Just wiring is different.)
-* For using **i2c_t3** library, browse "utilyt" directory and use these files as /src. This source code is support just Teensy devices.
+* The library is depending **Wire.h** and it supports using of pointers now, so BMP180 can be connected to the i2c interface specified by the user. Also, Arduino devices are supported, even those with multiple i2c interfaces. So, same sketches can be run on Arduino and Teensy. (Just wiring is different.)
+* For using with depend of **i2c_t3.h** library, browse "utilyt" directory and use these files as /src. This source code is support just Teensy devices.
 
 Review the example sketch for more information about using.
 
