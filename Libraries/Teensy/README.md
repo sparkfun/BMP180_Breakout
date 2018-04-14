@@ -1,11 +1,11 @@
 BMP180_Breakout Teensy Library v2.0
 ========================================
 
-This archive contains an Teensy library and example sketch showing how to use this sensor. The library must be installed onto your computer in order for the example code to work correctly.
+This archive contains a Teensy library and an example sketch showing how to use this sensor. The library must be installed onto your computer in order for the example code to work correctly.
 
 Info About Update
 -------------------
-* The library is depending **Wire.h** and supports specify i2c bus, so BMP180 can be connected to the i2c interface specified by the user.
+* Supports all i2c buses, so BMP180 can be connected to the i2c interface specified by the user. (depend of **Wire.h**)
 * For using with depend of **i2c_t3.h** library, browse "utilyt" directory and use these files as /src.
 
 Review the example sketch for more information about using.
