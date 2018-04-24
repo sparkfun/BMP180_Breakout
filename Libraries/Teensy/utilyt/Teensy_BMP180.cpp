@@ -9,7 +9,7 @@
 */
 #include <Teensy_BMP180.h>
 #include <stdio.h>
-#include <Wire.h>
+#include <i2c_t3.h>
 #include <math.h>
 
 

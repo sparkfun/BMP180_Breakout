@@ -10,12 +10,14 @@
 
 #ifndef Teensy_BMP180_h
 #define Teensy_BMP180_h
-#include "Wire.h"
+
+#include "i2c_t3.h"
+
 class Teensy_BMP180
 {
 	public:
 
-		Teensy_BMP180(TwoWire *hwWire){
+		Teensy_BMP180(i2c_t3 *hwWire){
 			WireSelected=hwWire;
 		} // base type
 
@@ -74,7 +76,7 @@ class Teensy_BMP180
 		double yy0,yy1,yy2;
 		double p0,p1,p2;
 
-		TwoWire *WireSelected;
+		i2c_t3 *WireSelected;
 };
 
 //Address of the BMP180 address
